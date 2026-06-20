@@ -8,13 +8,22 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
       },
       colors: {
-        accent: {
-          DEFAULT: '#34d399', // emerald-400
-          dim: '#10b981',
+        gold: {
+          DEFAULT: '#fbbf24', // amber-400
+          dim: '#d97706',
         },
+        ink: {
+          900: '#0c0e13',
+          800: '#11141b',
+          700: '#171b24',
+        },
+      },
+      borderRadius: {
+        xl: '0.9rem',
+        '2xl': '1.25rem',
       },
     },
   },

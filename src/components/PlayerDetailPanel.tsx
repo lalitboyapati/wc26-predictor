@@ -12,7 +12,7 @@ const POS_LABEL: Record<string, string> = { GK: 'GOALKEEPER', DF: 'DEFENDER', MF
 const POS_COLOR: Record<string, string> = {
   GK: 'text-amber-400 border-amber-400/40',
   DF: 'text-sky-400 border-sky-400/40',
-  MF: 'text-accent border-accent/40',
+  MF: 'text-emerald-300 border-emerald-300/40',
   FW: 'text-rose-400 border-rose-400/40',
 };
 
@@ -32,7 +32,7 @@ function StatCompare({
         </div>
         <div className="text-gray-700 text-xs">→</div>
         <div className="text-center">
-          <div className={`font-mono font-semibold text-sm ${better ? 'text-accent' : 'text-gray-300'}`}>
+          <div className={`tabular-nums font-semibold text-sm ${better ? 'text-gold' : 'text-gray-300'}`}>
             {projected.toFixed(projected % 1 === 0 ? 0 : 2)}{unit}
           </div>
           <div className="text-gray-600 text-[10px]">Projected</div>
@@ -63,10 +63,10 @@ export default function PlayerDetailPanel({ player, projection, onClose }: Props
       {/* Panel */}
       <div className="fixed bottom-0 left-0 right-0 z-50 max-h-[90vh] overflow-y-auto player-panel-enter
         md:fixed md:inset-y-0 md:right-0 md:left-auto md:w-[420px] md:max-h-full
-        bg-[#0a0f0c] border-t border-white/10 md:border-t-0 md:border-l">
+        bg-ink-800 border-t border-white/10 md:border-t-0 md:border-l rounded-t-2xl md:rounded-none">
 
         {/* Header */}
-        <div className="sticky top-0 bg-[#0a0f0c]/95 backdrop-blur border-b border-white/10 px-5 py-4 flex items-start justify-between">
+        <div className="sticky top-0 bg-ink-800/95 backdrop-blur border-b border-white/10 px-5 py-4 flex items-start justify-between">
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className={`text-[10px] tracking-wider px-2 py-0.5 border ${posColor}`}>

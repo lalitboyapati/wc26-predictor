@@ -12,7 +12,8 @@ Everything is computed in the browser from static data — **no backend required
 
 ## Features
 
-- **📅 Schedule** — all 72 group-stage fixtures grouped by day, each with a predicted scoreline and kickoff time in US Eastern.
+- **🔜 Upcoming** — matches from today onward, grouped by day (Today / Tomorrow / date), each with a predicted scoreline, the favourite, and a win-probability bar.
+- **📅 All Fixtures** — every group-stage fixture grouped by day, with predicted scorelines and kickoff times in US Eastern.
 - **🔮 Match prediction page** — win/draw/loss probability bar, expected goals (xG), and an optional live-odds overlay from Polymarket.
 - **🟢 Soccer pitch** — both starting XIs laid out in a 4-3-3, colour-coded by position. Click any player for a detail panel comparing their tournament stats to projected stats for the match, plus a suggested player prop.
 - **🎯 Betting suggestions** — the top 3 bets per match (over/under, anytime goalscorer, BTTS / Asian handicap / shots) derived from team and player stats, each with a confidence ring and estimated odds.

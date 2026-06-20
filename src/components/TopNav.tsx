@@ -1,47 +1,44 @@
 import { Link, useLocation } from 'react-router-dom';
 
 const TABS = [
-  { to: '/', label: 'SCHEDULE' },
-  { to: '/groups', label: 'GROUPS' },
-  { to: '/bracket', label: 'BRACKET' },
+  { to: '/', label: 'Upcoming' },
+  { to: '/schedule', label: 'All Fixtures' },
+  { to: '/groups', label: 'Groups' },
+  { to: '/bracket', label: 'Bracket' },
 ];
 
 export default function TopNav() {
   const { pathname } = useLocation();
-  const isActive = (to: string) => (to === '/' ? pathname === '/' || pathname.startsWith('/match') : pathname.startsWith(to));
+  const active = (to: string) => (to === '/' ? pathname === '/' : pathname.startsWith(to));
 
   return (
-    <header className="border-b border-white/10 bg-black/40 backdrop-blur sticky top-0 z-30">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* Top row: brand + status */}
-        <div className="flex items-center justify-between py-2.5">
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <span className="grid place-items-center w-7 h-7 border border-accent/40 text-accent text-sm font-bold">⚽</span>
-            <span className="text-sm font-bold tracking-[0.2em] text-white">
-              WC26 <span className="text-accent">// PREDICTOR</span>
-            </span>
-          </Link>
-          <div className="hidden sm:flex items-center gap-2 text-[11px] tracking-wider text-gray-500">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent blink" />
-            <span className="text-gray-400">FIFA WORLD CUP 2026</span>
-            <span className="text-gray-700">·</span>
-            <span>AI MODEL</span>
+    <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-ink-900/80 backdrop-blur-xl">
+      <div className="max-w-6xl mx-auto px-4 sm:px-5 h-16 flex items-center justify-between gap-4">
+        {/* Brand */}
+        <Link to="/" className="flex items-center gap-2.5 shrink-0">
+          <span className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-gold to-amber-600 text-ink-900 text-lg shadow-lg shadow-amber-900/30">
+            ⚽
+          </span>
+          <div className="leading-tight">
+            <div className="text-[15px] font-extrabold tracking-tight text-white">
+              World Cup <span className="text-gold">’26</span>
+            </div>
+            <div className="text-[11px] text-gray-500 -mt-0.5">Match Predictor</div>
           </div>
-        </div>
+        </Link>
 
-        {/* Tab row */}
-        <nav className="flex items-center gap-6 -mb-px">
+        {/* Tabs */}
+        <nav className="flex items-center gap-1 rounded-full bg-white/[0.04] border border-white/[0.06] p-1">
           {TABS.map(t => {
-            const active = isActive(t.to);
+            const on = active(t.to);
             return (
               <Link
                 key={t.to}
                 to={t.to}
-                className={`relative py-2.5 text-[12px] tracking-[0.15em] transition-colors
-                  ${active ? 'text-accent' : 'text-gray-500 hover:text-gray-300'}`}
+                className={`px-3 sm:px-3.5 py-1.5 rounded-full text-[13px] font-semibold transition-colors whitespace-nowrap
+                  ${on ? 'bg-gold text-ink-900' : 'text-gray-400 hover:text-white'}`}
               >
                 {t.label}
-                {active && <span className="absolute left-0 right-0 -bottom-px h-0.5 bg-accent" />}
               </Link>
             );
           })}

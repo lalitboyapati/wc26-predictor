@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
-import { getMatch, getTeam, getLineup, formatMatchTimeET } from '../lib/dataHelpers';
+import { getMatch, getTeam, getLineup, formatMatchTimeET, formatMatchDate } from '../lib/dataHelpers';
 import { predictMatch } from '../lib/predictor';
 import { generateBettingSuggestions, projectPlayerStats } from '../lib/bettingEngine';
 import { fetchPolymarketOdds } from '../lib/polymarket';
@@ -58,8 +58,8 @@ export default function MatchDetailPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-400 mb-4 tracking-wider">MATCH NOT FOUND</p>
-          <button onClick={() => navigate('/')} className="text-accent hover:underline tracking-wider text-sm">← BACK TO SCHEDULE</button>
+          <p className="text-gray-400 mb-4">Match not found.</p>
+          <button onClick={() => navigate('/')} className="text-gold hover:underline text-sm font-medium">← Back to matches</button>
         </div>
       </div>
     );
@@ -68,66 +68,66 @@ export default function MatchDetailPage() {
   const playerProjection = selectedPlayer ? projectPlayerStats(selectedPlayer) : null;
 
   return (
-    <div className="min-h-screen text-gray-200">
+    <div className="min-h-screen text-gray-100">
       <TopNav />
 
-      {/* Sub-header / breadcrumb */}
-      <div className="border-b border-white/10 bg-black/30">
-        <div className="max-w-5xl mx-auto px-4 py-2 flex items-center gap-3 text-[11px] tracking-wider">
-          <button onClick={() => navigate('/')} className="text-gray-400 hover:text-accent transition-colors">← SCHEDULE</button>
-          <span className="text-gray-700">/</span>
-          <span className="text-gray-500">{match.date}</span>
-          <span className="text-gray-700">/</span>
-          <span className="text-gray-600">{match.round.toUpperCase()}</span>
+      {/* breadcrumb */}
+      <div className="border-b border-white/[0.06] bg-ink-900/40">
+        <div className="max-w-5xl mx-auto px-4 sm:px-5 py-2.5 flex items-center gap-2.5 text-[12px] text-gray-500">
+          <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-gold transition-colors font-medium">← Back</button>
+          <span className="text-gray-700">·</span>
+          <span>{formatMatchDate(match.date)}</span>
+          <span className="text-gray-700">·</span>
+          <span>{match.round}</span>
         </div>
       </div>
 
-      <main className="max-w-5xl mx-auto px-4 py-6 space-y-4">
+      <main className="max-w-5xl mx-auto px-4 sm:px-5 py-6 space-y-4">
 
         {/* Hero */}
-        <div className="border border-white/10 bg-white/[0.015] p-5">
+        <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 sm:p-6">
           <div className="flex items-center justify-between gap-4">
             <div className="flex-1 flex items-center gap-3 min-w-0">
-              <Flag code={homeTeam?.flagCode ?? ''} name={match.homeTeam} size={80} className="w-11 h-7" />
+              <Flag code={homeTeam?.flagCode ?? ''} name={match.homeTeam} size={80} className="w-12 h-8 rounded-md" />
               <div className="min-w-0">
                 <p className="font-bold text-lg text-white truncate">{match.homeTeam}</p>
-                <p className="text-[11px] text-gray-500">#{homeTeam?.rank ?? '–'} · {homeTeam?.points?.toFixed(0) ?? '–'} PTS</p>
+                <p className="text-xs text-gray-500">#{homeTeam?.rank ?? '–'} · {homeTeam?.points?.toFixed(0) ?? '–'} pts</p>
               </div>
             </div>
 
             <div className="text-center px-3 flex-shrink-0">
               {predictedScore ? (
-                <span className="text-3xl font-bold text-white tabular-nums">
-                  {predictedScore.homeGoals}<span className="text-gray-700">:</span>{predictedScore.awayGoals}
+                <span className="text-4xl font-extrabold text-white tabular-nums">
+                  {predictedScore.homeGoals}<span className="text-gray-700 text-2xl mx-1">–</span>{predictedScore.awayGoals}
                 </span>
               ) : (
                 <span className="text-2xl font-bold text-gray-600">VS</span>
               )}
-              <p className="text-[9px] tracking-[0.2em] text-accent/70 mt-1">PREDICTED</p>
-              <p className="text-[10px] tracking-wider text-gray-600 mt-0.5">{formatMatchTimeET(match)}</p>
+              <p className="text-[11px] font-semibold text-gold/80 mt-1">Predicted score</p>
+              <p className="text-[11px] text-gray-600 mt-0.5">{formatMatchTimeET(match)}</p>
             </div>
 
             <div className="flex-1 flex items-center gap-3 justify-end min-w-0">
               <div className="text-right min-w-0">
                 <p className="font-bold text-lg text-white truncate">{match.awayTeam}</p>
-                <p className="text-[11px] text-gray-500">#{awayTeam?.rank ?? '–'} · {awayTeam?.points?.toFixed(0) ?? '–'} PTS</p>
+                <p className="text-xs text-gray-500">#{awayTeam?.rank ?? '–'} · {awayTeam?.points?.toFixed(0) ?? '–'} pts</p>
               </div>
-              <Flag code={awayTeam?.flagCode ?? ''} name={match.awayTeam} size={80} className="w-11 h-7" />
+              <Flag code={awayTeam?.flagCode ?? ''} name={match.awayTeam} size={80} className="w-12 h-8 rounded-md" />
             </div>
           </div>
         </div>
 
-        {/* Odds + Betting side by side on desktop (bettor focus) */}
+        {/* Odds + Betting (bettor focus) */}
         <div className="grid lg:grid-cols-2 gap-4">
           {prediction && (
-            <div className="border border-white/10 bg-white/[0.015] p-4">
+            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
               <WinProbabilityBar
                 prediction={prediction}
                 homeTeam={match.homeTeam}
                 awayTeam={match.awayTeam}
                 liveOdds={liveOdds ?? undefined}
               />
-              {loadingOdds && <p className="text-[10px] tracking-wider text-gray-600 mt-2">CHECKING POLYMARKET…</p>}
+              {loadingOdds && <p className="text-[11px] text-gray-600 mt-2">Checking Polymarket…</p>}
             </div>
           )}
           {bettingSuggestions.length > 0 && (
@@ -136,10 +136,10 @@ export default function MatchDetailPage() {
         </div>
 
         {/* Pitch */}
-        <div className="border border-white/10 bg-white/[0.015] p-4">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-[11px] tracking-[0.2em] text-gray-400">▸ STARTING XI — CLICK A PLAYER</span>
-            <span className="text-[10px] tracking-wider text-gray-600">4-3-3</span>
+        <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4 sm:p-5">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-bold text-white">Starting XI <span className="font-normal text-gray-500">— tap a player</span></h3>
+            <span className="text-xs text-gray-600">4-3-3</span>
           </div>
           {allMatchPlayers.length > 0 ? (
             <SoccerPitch
@@ -151,25 +151,25 @@ export default function MatchDetailPage() {
               selectedPlayerId={selectedPlayer?.id}
             />
           ) : (
-            <div className="text-center py-10 text-gray-600 text-sm tracking-wider">NO LINEUP DATA</div>
+            <div className="text-center py-10 text-gray-600 text-sm">No lineup data.</div>
           )}
         </div>
 
         {/* Team stats */}
         {homeTeam && awayTeam && (
-          <div className="border border-white/10 bg-white/[0.015] p-4">
-            <span className="text-[11px] tracking-[0.2em] text-gray-400">▸ TEAM COMPARISON</span>
-            <div className="mt-3 space-y-2">
+          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
+            <h3 className="text-sm font-bold text-white mb-4">Team Comparison</h3>
+            <div className="space-y-2.5">
               {[
-                { label: 'FIFA RANKING', home: `#${homeTeam.rank}`, away: `#${awayTeam.rank}` },
-                { label: 'FIFA POINTS', home: homeTeam.points.toFixed(0), away: awayTeam.points.toFixed(0) },
-                { label: 'AVG GOALS SCORED', home: homeTeam.avgGoalsScored.toFixed(2), away: awayTeam.avgGoalsScored.toFixed(2) },
-                { label: 'PROJECTED xG', home: String(prediction?.xGHome ?? '–'), away: String(prediction?.xGAway ?? '–') },
+                { label: 'FIFA Ranking', home: `#${homeTeam.rank}`, away: `#${awayTeam.rank}` },
+                { label: 'FIFA Points', home: homeTeam.points.toFixed(0), away: awayTeam.points.toFixed(0) },
+                { label: 'Avg Goals Scored', home: homeTeam.avgGoalsScored.toFixed(2), away: awayTeam.avgGoalsScored.toFixed(2) },
+                { label: 'Projected xG', home: String(prediction?.xGHome ?? '–'), away: String(prediction?.xGAway ?? '–') },
               ].map(row => (
-                <div key={row.label} className="flex items-center gap-3 text-[12px] tabular-nums">
-                  <span className="text-accent w-16 text-right">{row.home}</span>
-                  <span className="flex-1 text-center text-gray-600 text-[10px] tracking-wider">{row.label}</span>
-                  <span className="text-sky-400 w-16">{row.away}</span>
+                <div key={row.label} className="flex items-center gap-3 text-[13px] tabular-nums">
+                  <span className="text-sky-300 font-semibold w-16 text-right">{row.home}</span>
+                  <span className="flex-1 text-center text-gray-500 text-[12px]">{row.label}</span>
+                  <span className="text-rose-300 font-semibold w-16">{row.away}</span>
                 </div>
               ))}
             </div>

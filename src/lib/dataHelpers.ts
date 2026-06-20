@@ -85,6 +85,25 @@ export function formatMatchDate(dateStr: string): string {
   return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
 }
 
+/** Local "today" as YYYY-MM-DD (matches the schedule's date format). */
+export function todayISO(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+/** Relative label: "Today" / "Tomorrow", else the full date. */
+export function relativeDayLabel(dateStr: string): string {
+  const today = todayISO();
+  if (dateStr === today) return 'Today';
+  const t = new Date(today + 'T12:00:00');
+  const tomorrow = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate() + 1).padStart(2, '0')}`;
+  // normalise via Date to handle month rollover
+  const tm = new Date(t.getTime() + 86400000);
+  const tmISO = `${tm.getFullYear()}-${String(tm.getMonth() + 1).padStart(2, '0')}-${String(tm.getDate()).padStart(2, '0')}`;
+  if (dateStr === tmISO || dateStr === tomorrow) return 'Tomorrow';
+  return formatMatchDate(dateStr);
+}
+
 // Schedule times are stored as UTC. Render kickoff in US Eastern time, e.g. "9:00 AM ET".
 const ET_TIME_FMT = new Intl.DateTimeFormat('en-US', {
   timeZone: 'America/New_York',

@@ -11,23 +11,23 @@ export default function BracketPage() {
   }, []);
 
   return (
-    <div className="min-h-screen text-gray-200">
+    <div className="min-h-screen text-gray-100">
       <TopNav />
-      <main className="max-w-6xl mx-auto px-4 py-6">
-        <div className="mb-5">
-          <h1 className="text-base tracking-[0.2em] text-white">KNOCKOUT BRACKET</h1>
-          <p className="text-[11px] tracking-wider text-gray-500 mt-1 max-w-2xl leading-relaxed">
-            FULL TOURNAMENT PROJECTION — 32 QUALIFIERS SEEDED FROM THE GROUP TABLES, EACH TIE RESOLVED
-            BY THE MODEL THROUGH TO A PREDICTED CHAMPION.
+      <main className="max-w-6xl mx-auto px-4 sm:px-5 py-7">
+        <div className="mb-6">
+          <h1 className="text-2xl font-extrabold tracking-tight text-white">Knockout Bracket</h1>
+          <p className="text-sm text-gray-500 mt-1 max-w-2xl">
+            The full tournament projected out — 32 qualifiers seeded from the group tables, every tie
+            resolved by the model through to a predicted champion.
           </p>
         </div>
 
-        <div className="border border-white/10 bg-white/[0.01] p-4">
+        <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
           <Bracket rounds={rounds} />
         </div>
 
-        <p className="text-[10px] tracking-wider text-gray-600 mt-4">
-          ▸ GREEN ROWS = PROJECTED WINNERS · QUALIFIERS PULLED DIRECTLY FROM PREDICTED GROUP STANDINGS
+        <p className="text-xs text-gray-600 mt-4">
+          Gold rows are projected winners · qualifiers pulled from the predicted group standings.
         </p>
       </main>
     </div>

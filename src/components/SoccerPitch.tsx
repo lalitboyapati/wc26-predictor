@@ -81,9 +81,9 @@ export default function SoccerPitch({
     <div className="relative w-full" style={{ paddingBottom: '62%' }}>
       {/* Pitch background */}
       <div
-        className="absolute inset-0 overflow-hidden border border-accent/15"
+        className="absolute inset-0 overflow-hidden rounded-xl border border-white/10"
         style={{
-          background: 'repeating-linear-gradient(90deg, #0a1611 0px, #0a1611 9%, #0c1a14 9%, #0c1a14 18%)',
+          background: 'repeating-linear-gradient(90deg, #14532d 0%, #14532d 9%, #166534 9%, #166534 18%)',
         }}
       >
         {/* SVG pitch markings */}
@@ -117,12 +117,12 @@ export default function SoccerPitch({
         </svg>
 
         {/* Team labels */}
-        <div className="absolute top-2 left-3 text-accent/60 text-[10px] tracking-widest">{homeTeam.toUpperCase()}</div>
-        <div className="absolute top-2 right-3 text-sky-400/60 text-[10px] tracking-widest">{awayTeam.toUpperCase()}</div>
+        <div className="absolute top-2 left-3 text-white/75 text-[11px] font-semibold">{homeTeam}</div>
+        <div className="absolute top-2 right-3 text-white/75 text-[11px] font-semibold">{awayTeam}</div>
 
         {/* Attacking direction arrows */}
-        <div className="absolute bottom-2 left-5 text-white/25 text-[9px] tracking-wider">← ATK</div>
-        <div className="absolute bottom-2 right-5 text-white/25 text-[9px] tracking-wider">ATK →</div>
+        <div className="absolute bottom-2 left-4 text-white/40 text-[10px]">← attacking</div>
+        <div className="absolute bottom-2 right-4 text-white/40 text-[10px]">attacking →</div>
       </div>
 
       {/* Player dots */}

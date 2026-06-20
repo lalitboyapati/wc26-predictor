@@ -9,27 +9,26 @@ export default function GroupsPage() {
   const groups = useMemo(() => deriveGroups(), []);
 
   return (
-    <div className="min-h-screen text-gray-200">
+    <div className="min-h-screen text-gray-100">
       <TopNav />
-      <main className="max-w-6xl mx-auto px-4 py-6">
+      <main className="max-w-6xl mx-auto px-4 sm:px-5 py-7">
         <div className="mb-6 flex items-start justify-between gap-4 flex-wrap">
           <div>
-            <h1 className="text-base tracking-[0.2em] text-white">GROUP STANDINGS</h1>
-            <p className="text-[11px] tracking-wider text-gray-500 mt-1 max-w-2xl leading-relaxed">
-              PROJECTED FINAL TABLES — MODEL PLAYS OUT ALL 6 GROUP GAMES. TOP 2 +{' '}
-              8 BEST 3RD-PLACED TEAMS{' '}
-              <button onClick={() => navigate('/bracket')} className="text-accent hover:underline">
-                SEED THE BRACKET →
-              </button>
+            <h1 className="text-2xl font-extrabold tracking-tight text-white">Group Standings</h1>
+            <p className="text-sm text-gray-500 mt-1 max-w-2xl">
+              Projected final tables. Top 2 plus the 8 best third-placed teams{' '}
+              <button onClick={() => navigate('/bracket')} className="text-gold hover:underline font-medium">
+                advance to the bracket
+              </button>.
             </p>
           </div>
-          <div className="flex items-center gap-4 text-[10px] tracking-wider text-gray-500">
-            <span className="flex items-center gap-1.5"><span className="w-2 h-2 bg-accent" /> QUALIFY</span>
-            <span className="flex items-center gap-1.5"><span className="w-2 h-2 bg-amber-500" /> BEST-3RD</span>
+          <div className="flex items-center gap-4 text-xs text-gray-400">
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-sky-400" /> Qualify</span>
+            <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-gold" /> Best 3rd</span>
           </div>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {groups.map(g => (
             <GroupStandings key={g.label} group={g} />
           ))}

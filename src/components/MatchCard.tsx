@@ -15,48 +15,60 @@ export default function MatchCard({ match, homeTeam, awayTeam, onClick }: Props)
   const { homeGoals, awayGoals } = getPredictedScore(match);
   const pred = homeTeam && awayTeam ? predictMatch(homeTeam, awayTeam) : null;
 
+  // favourite chip
+  let fav: { name: string; pct: number } | null = null;
+  if (pred) {
+    if (pred.homeWin >= pred.awayWin && pred.homeWin >= pred.draw) fav = { name: match.homeTeam, pct: pred.homeWin };
+    else if (pred.awayWin >= pred.draw) fav = { name: match.awayTeam, pct: pred.awayWin };
+    else fav = { name: 'Draw', pct: pred.draw };
+  }
+
   return (
     <button
       onClick={onClick}
-      className="w-full text-left border border-white/10 bg-white/[0.015] transition-colors cursor-pointer group
-        hover:border-accent/40 hover:bg-white/[0.03]"
+      className="group w-full text-left rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4
+        transition-all duration-200 hover:bg-white/[0.05] hover:border-white/15 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/30"
     >
-      <div className="p-3.5">
-        {/* meta row */}
-        <div className="flex items-center justify-between mb-2.5 text-[10px] tracking-wider text-gray-600">
-          <span>{formatMatchTimeET(match)}</span>
-          <span className="text-accent/60">PREDICTED</span>
-        </div>
-
-        {/* teams + score */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 flex-1 min-w-0">
-            <Flag code={homeTeam?.flagCode ?? ''} name={match.homeTeam} size={40} className="w-7 h-[18px] flex-shrink-0" />
-            <span className="text-sm text-gray-200 truncate group-hover:text-white">{match.homeTeam}</span>
-          </div>
-          <span className="text-base font-bold text-white tabular-nums px-1">{homeGoals}<span className="text-gray-600">:</span>{awayGoals}</span>
-          <div className="flex items-center gap-2 flex-1 min-w-0 justify-end">
-            <span className="text-sm text-gray-200 truncate text-right group-hover:text-white">{match.awayTeam}</span>
-            <Flag code={awayTeam?.flagCode ?? ''} name={match.awayTeam} size={40} className="w-7 h-[18px] flex-shrink-0" />
-          </div>
-        </div>
-
-        {/* win-probability mini bar */}
-        {pred && (
-          <div className="mt-3">
-            <div className="flex h-1.5 w-full overflow-hidden gap-px">
-              <div className="bg-accent" style={{ width: `${pred.homeWin}%` }} />
-              <div className="bg-gray-600" style={{ width: `${pred.draw}%` }} />
-              <div className="bg-sky-400/80" style={{ width: `${pred.awayWin}%` }} />
-            </div>
-            <div className="flex items-center justify-between mt-1.5 text-[10px] tracking-wider text-gray-600">
-              <span className="text-accent/80">{pred.homeWin}%</span>
-              <span>DRAW {pred.draw}%</span>
-              <span className="text-sky-400/80">{pred.awayWin}%</span>
-            </div>
-          </div>
+      {/* meta */}
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-xs text-gray-500">{formatMatchTimeET(match)}</span>
+        {fav && (
+          <span className="text-[11px] font-medium text-gold/90 bg-gold/10 rounded-full px-2 py-0.5">
+            {fav.name} {fav.pct}%
+          </span>
         )}
       </div>
+
+      {/* teams + score */}
+      <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 flex-1 min-w-0">
+          <Flag code={homeTeam?.flagCode ?? ''} name={match.homeTeam} size={40} className="w-8 h-[21px] rounded flex-shrink-0" />
+          <span className="text-[15px] font-semibold text-gray-100 truncate">{match.homeTeam}</span>
+        </div>
+        <div className="flex items-center gap-1.5 text-lg font-bold text-white tabular-nums">
+          <span>{homeGoals}</span><span className="text-gray-600 text-sm">–</span><span>{awayGoals}</span>
+        </div>
+        <div className="flex items-center gap-2.5 flex-1 min-w-0 justify-end">
+          <span className="text-[15px] font-semibold text-gray-100 truncate text-right">{match.awayTeam}</span>
+          <Flag code={awayTeam?.flagCode ?? ''} name={match.awayTeam} size={40} className="w-8 h-[21px] rounded flex-shrink-0" />
+        </div>
+      </div>
+
+      {/* win-probability bar */}
+      {pred && (
+        <div className="mt-3.5">
+          <div className="flex h-1.5 w-full overflow-hidden rounded-full gap-0.5">
+            <div className="bg-sky-400 rounded-l-full" style={{ width: `${pred.homeWin}%` }} />
+            <div className="bg-zinc-600" style={{ width: `${pred.draw}%` }} />
+            <div className="bg-rose-400 rounded-r-full" style={{ width: `${pred.awayWin}%` }} />
+          </div>
+          <div className="flex items-center justify-between mt-1.5 text-[11px] text-gray-500">
+            <span className="text-sky-300/90">{pred.homeWin}%</span>
+            <span>Draw {pred.draw}%</span>
+            <span className="text-rose-300/90">{pred.awayWin}%</span>
+          </div>
+        </div>
+      )}
     </button>
   );
 }
