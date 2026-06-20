@@ -1,46 +1,50 @@
 import { Link, useLocation } from 'react-router-dom';
 
+const TABS = [
+  { to: '/', label: 'SCHEDULE' },
+  { to: '/groups', label: 'GROUPS' },
+  { to: '/bracket', label: 'BRACKET' },
+];
+
 export default function TopNav() {
   const { pathname } = useLocation();
-  const onBracket = pathname.startsWith('/bracket');
-  const onGroups = pathname.startsWith('/groups');
-  const onSchedule = !onBracket && !onGroups;
+  const isActive = (to: string) => (to === '/' ? pathname === '/' || pathname.startsWith('/match') : pathname.startsWith(to));
 
   return (
-    <header className="border-b border-white/10 bg-gradient-to-r from-violet-700 via-fuchsia-700 to-rose-600 sticky top-0 z-30 shadow-lg">
-      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <span className="text-2xl group-hover:scale-110 transition-transform">⚽</span>
-          <div>
-            <h1 className="text-lg font-extrabold text-white tracking-tight leading-none">
-              WORLD CUP <span className="text-yellow-300">2026</span>
-            </h1>
-            <p className="text-[10px] text-white/70 leading-none mt-0.5">Predictor &amp; Analytics</p>
+    <header className="border-b border-white/10 bg-black/40 backdrop-blur sticky top-0 z-30">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Top row: brand + status */}
+        <div className="flex items-center justify-between py-2.5">
+          <Link to="/" className="flex items-center gap-2.5 group">
+            <span className="grid place-items-center w-7 h-7 border border-accent/40 text-accent text-sm font-bold">⚽</span>
+            <span className="text-sm font-bold tracking-[0.2em] text-white">
+              WC26 <span className="text-accent">// PREDICTOR</span>
+            </span>
+          </Link>
+          <div className="hidden sm:flex items-center gap-2 text-[11px] tracking-wider text-gray-500">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent blink" />
+            <span className="text-gray-400">FIFA WORLD CUP 2026</span>
+            <span className="text-gray-700">·</span>
+            <span>AI MODEL</span>
           </div>
-        </Link>
+        </div>
 
-        <nav className="flex items-center gap-1 bg-black/20 rounded-lg p-1">
-          <Link
-            to="/"
-            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors
-              ${onSchedule ? 'bg-white/90 text-violet-900' : 'text-white/80 hover:text-white'}`}
-          >
-            📅 Schedule
-          </Link>
-          <Link
-            to="/groups"
-            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors
-              ${onGroups ? 'bg-white/90 text-violet-900' : 'text-white/80 hover:text-white'}`}
-          >
-            📊 Groups
-          </Link>
-          <Link
-            to="/bracket"
-            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors
-              ${onBracket ? 'bg-white/90 text-violet-900' : 'text-white/80 hover:text-white'}`}
-          >
-            🏆 Bracket
-          </Link>
+        {/* Tab row */}
+        <nav className="flex items-center gap-6 -mb-px">
+          {TABS.map(t => {
+            const active = isActive(t.to);
+            return (
+              <Link
+                key={t.to}
+                to={t.to}
+                className={`relative py-2.5 text-[12px] tracking-[0.15em] transition-colors
+                  ${active ? 'text-accent' : 'text-gray-500 hover:text-gray-300'}`}
+              >
+                {t.label}
+                {active && <span className="absolute left-0 right-0 -bottom-px h-0.5 bg-accent" />}
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </header>

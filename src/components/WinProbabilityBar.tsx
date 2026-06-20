@@ -7,81 +7,63 @@ interface Props {
   liveOdds?: PolymarketOdds;
 }
 
-export default function WinProbabilityBar({ prediction, homeTeam, awayTeam, liveOdds }: Props) {
-  const { homeWin, draw, awayWin } = prediction;
+// Fair decimal odds from a probability (with a small book margin).
+function impliedOdds(pct: number): string {
+  if (pct <= 0) return '–';
+  return ((1 / (pct / 100)) * 0.94).toFixed(2);
+}
 
-  // Use Polymarket odds if available, otherwise fall back to our prediction
-  const displayHome = liveOdds?.homeWin ?? homeWin;
-  const displayDraw = liveOdds?.draw    ?? draw;
-  const displayAway = liveOdds?.awayWin ?? awayWin;
-  const usingLive   = liveOdds?.source === 'polymarket';
+export default function WinProbabilityBar({ prediction, homeTeam, awayTeam, liveOdds }: Props) {
+  const displayHome = liveOdds?.homeWin ?? prediction.homeWin;
+  const displayDraw = liveOdds?.draw    ?? prediction.draw;
+  const displayAway = liveOdds?.awayWin ?? prediction.awayWin;
+  const usingLive = liveOdds?.source === 'polymarket';
+
+  const cols = [
+    { label: homeTeam, pct: displayHome, color: 'text-accent', bar: 'bg-accent' },
+    { label: 'DRAW', pct: displayDraw, color: 'text-gray-300', bar: 'bg-gray-600' },
+    { label: awayTeam, pct: displayAway, color: 'text-sky-400', bar: 'bg-sky-400/80' },
+  ];
 
   return (
-    <div className="space-y-3">
-      {/* Source badge */}
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wide">
-          Win Probability
-        </h3>
-        <span className={`text-xs px-2 py-0.5 rounded-full border font-medium
-          ${usingLive
-            ? 'bg-green-500/10 border-green-500/40 text-green-400'
-            : 'bg-gray-700/50 border-gray-600 text-gray-500'
-          }`}
-        >
-          {usingLive ? '🟢 Polymarket Live' : '🤖 AI Model'}
+    <div>
+      {/* header */}
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-[11px] tracking-[0.2em] text-gray-400">▸ MATCH ODDS (1X2)</span>
+        <span className={`text-[10px] tracking-wider px-1.5 py-0.5 border ${usingLive ? 'border-accent/40 text-accent' : 'border-white/10 text-gray-500'}`}>
+          {usingLive ? 'POLYMARKET LIVE' : 'AI MODEL'}
         </span>
       </div>
 
-      {/* Labels */}
-      <div className="flex justify-between text-sm font-semibold mb-1">
-        <span className="text-green-400">{homeTeam}</span>
-        <span className="text-yellow-400">Draw</span>
-        <span className="text-blue-400">{awayTeam}</span>
+      {/* three outcome cells with implied odds */}
+      <div className="grid grid-cols-3 gap-2 mb-3">
+        {cols.map((c, i) => (
+          <div key={i} className="border border-white/10 bg-white/[0.02] px-2 py-2 text-center">
+            <div className={`text-[10px] tracking-wider truncate ${c.color}`}>{c.label}</div>
+            <div className="text-lg font-bold text-white tabular-nums leading-tight mt-0.5">{impliedOdds(c.pct)}</div>
+            <div className="text-[10px] text-gray-500 tabular-nums">{c.pct}%</div>
+          </div>
+        ))}
       </div>
 
-      {/* Stacked bar */}
-      <div className="flex h-8 rounded-lg overflow-hidden gap-0.5">
-        <div
-          className="flex items-center justify-center bg-green-600 text-white text-xs font-bold transition-all duration-700"
-          style={{ width: `${displayHome}%` }}
-        >
-          {displayHome}%
-        </div>
-        <div
-          className="flex items-center justify-center bg-yellow-600 text-white text-xs font-bold transition-all duration-700"
-          style={{ width: `${displayDraw}%`, minWidth: displayDraw > 0 ? '32px' : 0 }}
-        >
-          {displayDraw > 5 ? `${displayDraw}%` : ''}
-        </div>
-        <div
-          className="flex items-center justify-center bg-blue-600 text-white text-xs font-bold transition-all duration-700"
-          style={{ width: `${displayAway}%` }}
-        >
-          {displayAway}%
-        </div>
+      {/* stacked bar */}
+      <div className="flex h-2 w-full overflow-hidden gap-px">
+        <div className="bg-accent" style={{ width: `${displayHome}%` }} />
+        <div className="bg-gray-600" style={{ width: `${displayDraw}%` }} />
+        <div className="bg-sky-400/80" style={{ width: `${displayAway}%` }} />
       </div>
 
-      {/* xG row */}
-      <div className="flex justify-between text-xs text-gray-500 pt-1">
-        <span>xG: <span className="text-gray-300 font-mono">{prediction.xGHome}</span></span>
-        <span className={`text-xs ${
-          prediction.confidence === 'high' ? 'text-green-500' :
-          prediction.confidence === 'medium' ? 'text-yellow-500' : 'text-gray-500'
-        }`}>
-          {prediction.confidence} confidence
-        </span>
-        <span>xG: <span className="text-gray-300 font-mono">{prediction.xGAway}</span></span>
+      {/* xG + confidence */}
+      <div className="flex justify-between items-center text-[11px] text-gray-500 mt-3">
+        <span>xG <span className="text-accent tabular-nums">{prediction.xGHome}</span></span>
+        <span className="tracking-wider text-gray-600">{prediction.confidence.toUpperCase()} CONFIDENCE</span>
+        <span>xG <span className="text-sky-400 tabular-nums">{prediction.xGAway}</span></span>
       </div>
 
       {usingLive && liveOdds?.marketUrl && (
-        <a
-          href={liveOdds.marketUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs text-green-400/70 hover:text-green-400 underline"
-        >
-          View on Polymarket →
+        <a href={liveOdds.marketUrl} target="_blank" rel="noopener noreferrer"
+          className="inline-block mt-3 text-[11px] text-accent/70 hover:text-accent tracking-wider">
+          VIEW ON POLYMARKET →
         </a>
       )}
     </div>

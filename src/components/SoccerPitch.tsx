@@ -10,10 +10,10 @@ interface Props {
 }
 
 const POS_COLORS: Record<string, string> = {
-  GK: '#f59e0b',
-  DF: '#3b82f6',
-  MF: '#10b981',
-  FW: '#ef4444',
+  GK: '#f59e0b', // amber
+  DF: '#38bdf8', // sky
+  MF: '#34d399', // accent green
+  FW: '#fb7185', // rose
 };
 
 function PlayerDot({
@@ -81,9 +81,9 @@ export default function SoccerPitch({
     <div className="relative w-full" style={{ paddingBottom: '62%' }}>
       {/* Pitch background */}
       <div
-        className="absolute inset-0 rounded-xl overflow-hidden border border-white/10"
+        className="absolute inset-0 overflow-hidden border border-accent/15"
         style={{
-          background: 'linear-gradient(180deg, #2d6a2d 0%, #347a34 25%, #2d6a2d 50%, #347a34 75%, #2d6a2d 100%)',
+          background: 'repeating-linear-gradient(90deg, #0a1611 0px, #0a1611 9%, #0c1a14 9%, #0c1a14 18%)',
         }}
       >
         {/* SVG pitch markings */}
@@ -117,12 +117,12 @@ export default function SoccerPitch({
         </svg>
 
         {/* Team labels */}
-        <div className="absolute top-2 left-3 text-white/50 text-xs font-semibold">{homeTeam}</div>
-        <div className="absolute top-2 right-3 text-white/50 text-xs font-semibold">{awayTeam}</div>
+        <div className="absolute top-2 left-3 text-accent/60 text-[10px] tracking-widest">{homeTeam.toUpperCase()}</div>
+        <div className="absolute top-2 right-3 text-sky-400/60 text-[10px] tracking-widest">{awayTeam.toUpperCase()}</div>
 
         {/* Attacking direction arrows */}
-        <div className="absolute bottom-2 left-6 text-white/30 text-xs">← attacking</div>
-        <div className="absolute bottom-2 right-6 text-white/30 text-xs">attacking →</div>
+        <div className="absolute bottom-2 left-5 text-white/25 text-[9px] tracking-wider">← ATK</div>
+        <div className="absolute bottom-2 right-5 text-white/25 text-[9px] tracking-wider">ATK →</div>
       </div>
 
       {/* Player dots */}

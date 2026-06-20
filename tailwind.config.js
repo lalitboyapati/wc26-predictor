@@ -7,14 +7,16 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
+      },
       colors: {
-        pitch: {
-          green: '#2d6a2d',
-          light: '#347a34',
-        }
-      }
+        accent: {
+          DEFAULT: '#34d399', // emerald-400
+          dim: '#10b981',
+        },
+      },
     },
   },
   plugins: [],
 }
-

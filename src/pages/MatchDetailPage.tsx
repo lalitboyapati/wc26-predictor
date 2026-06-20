@@ -56,10 +56,10 @@ export default function MatchDetailPage() {
 
   if (!match) {
     return (
-      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-400 text-lg mb-4">Match not found.</p>
-          <button onClick={() => navigate('/')} className="text-blue-400 hover:underline">← Back to schedule</button>
+          <p className="text-gray-400 mb-4 tracking-wider">MATCH NOT FOUND</p>
+          <button onClick={() => navigate('/')} className="text-accent hover:underline tracking-wider text-sm">← BACK TO SCHEDULE</button>
         </div>
       </div>
     );
@@ -68,94 +68,78 @@ export default function MatchDetailPage() {
   const playerProjection = selectedPlayer ? projectPlayerStats(selectedPlayer) : null;
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100">
+    <div className="min-h-screen text-gray-200">
       <TopNav />
 
-      {/* Sub-header */}
-      <div className="border-b border-white/5 bg-gray-900/60 backdrop-blur">
-        <div className="max-w-4xl mx-auto px-4 py-2.5 flex items-center gap-3">
-          <button
-            onClick={() => navigate('/')}
-            className="text-gray-400 hover:text-white transition-colors flex items-center gap-1 text-sm"
-          >
-            <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-            </svg>
-            Schedule
-          </button>
-          <div className="h-4 w-px bg-gray-700" />
-          <span className="text-gray-400 text-sm">{match.date}</span>
-          <div className="h-4 w-px bg-gray-700" />
-          <span className="text-gray-500 text-xs">{match.round}</span>
+      {/* Sub-header / breadcrumb */}
+      <div className="border-b border-white/10 bg-black/30">
+        <div className="max-w-5xl mx-auto px-4 py-2 flex items-center gap-3 text-[11px] tracking-wider">
+          <button onClick={() => navigate('/')} className="text-gray-400 hover:text-accent transition-colors">← SCHEDULE</button>
+          <span className="text-gray-700">/</span>
+          <span className="text-gray-500">{match.date}</span>
+          <span className="text-gray-700">/</span>
+          <span className="text-gray-600">{match.round.toUpperCase()}</span>
         </div>
       </div>
 
-      <main className="max-w-4xl mx-auto px-4 py-6 space-y-6">
+      <main className="max-w-5xl mx-auto px-4 py-6 space-y-4">
 
-        {/* Hero: teams */}
-        <div className="rounded-xl bg-gradient-to-br from-violet-900/30 via-gray-900 to-fuchsia-900/20 border border-white/10 p-5">
+        {/* Hero */}
+        <div className="border border-white/10 bg-white/[0.015] p-5">
           <div className="flex items-center justify-between gap-4">
-            {/* Home */}
-            <div className="flex-1 flex items-center gap-3">
-              <Flag code={homeTeam?.flagCode ?? ''} name={match.homeTeam} size={80} className="w-12 h-8 shadow" />
-              <div>
-                <p className="font-bold text-xl text-white">{match.homeTeam}</p>
-                <p className="text-xs text-gray-400">#{homeTeam?.rank ?? '–'} FIFA · {homeTeam?.points?.toFixed(0) ?? '–'} pts</p>
+            <div className="flex-1 flex items-center gap-3 min-w-0">
+              <Flag code={homeTeam?.flagCode ?? ''} name={match.homeTeam} size={80} className="w-11 h-7" />
+              <div className="min-w-0">
+                <p className="font-bold text-lg text-white truncate">{match.homeTeam}</p>
+                <p className="text-[11px] text-gray-500">#{homeTeam?.rank ?? '–'} · {homeTeam?.points?.toFixed(0) ?? '–'} PTS</p>
               </div>
             </div>
 
-            {/* Predicted scoreline */}
-            <div className="text-center px-4">
+            <div className="text-center px-3 flex-shrink-0">
               {predictedScore ? (
-                <>
-                  <span className="text-3xl font-black font-mono text-white">
-                    {predictedScore.homeGoals}–{predictedScore.awayGoals}
-                  </span>
-                  <p className="mt-1">
-                    <span className="text-[10px] uppercase tracking-wide text-fuchsia-400/80 font-semibold">
-                      AI predicted
-                    </span>
-                  </p>
-                </>
+                <span className="text-3xl font-bold text-white tabular-nums">
+                  {predictedScore.homeGoals}<span className="text-gray-700">:</span>{predictedScore.awayGoals}
+                </span>
               ) : (
-                <span className="text-2xl font-black text-gray-600">VS</span>
+                <span className="text-2xl font-bold text-gray-600">VS</span>
               )}
-              <p className="text-xs text-gray-600 mt-1">{formatMatchTimeET(match)}</p>
+              <p className="text-[9px] tracking-[0.2em] text-accent/70 mt-1">PREDICTED</p>
+              <p className="text-[10px] tracking-wider text-gray-600 mt-0.5">{formatMatchTimeET(match)}</p>
             </div>
 
-            {/* Away */}
-            <div className="flex-1 flex items-center gap-3 justify-end">
-              <div className="text-right">
-                <p className="font-bold text-xl text-white">{match.awayTeam}</p>
-                <p className="text-xs text-gray-400">#{awayTeam?.rank ?? '–'} FIFA · {awayTeam?.points?.toFixed(0) ?? '–'} pts</p>
+            <div className="flex-1 flex items-center gap-3 justify-end min-w-0">
+              <div className="text-right min-w-0">
+                <p className="font-bold text-lg text-white truncate">{match.awayTeam}</p>
+                <p className="text-[11px] text-gray-500">#{awayTeam?.rank ?? '–'} · {awayTeam?.points?.toFixed(0) ?? '–'} PTS</p>
               </div>
-              <Flag code={awayTeam?.flagCode ?? ''} name={match.awayTeam} size={80} className="w-12 h-8 shadow" />
+              <Flag code={awayTeam?.flagCode ?? ''} name={match.awayTeam} size={80} className="w-11 h-7" />
             </div>
           </div>
         </div>
 
-        {/* Win probability */}
-        {prediction && (
-          <div className="rounded-xl bg-gray-900 border border-gray-800 p-5">
-            <WinProbabilityBar
-              prediction={prediction}
-              homeTeam={match.homeTeam}
-              awayTeam={match.awayTeam}
-              liveOdds={liveOdds ?? undefined}
-            />
-            {loadingOdds && (
-              <p className="text-xs text-gray-600 mt-2">Checking Polymarket for live odds…</p>
-            )}
-          </div>
-        )}
+        {/* Odds + Betting side by side on desktop (bettor focus) */}
+        <div className="grid lg:grid-cols-2 gap-4">
+          {prediction && (
+            <div className="border border-white/10 bg-white/[0.015] p-4">
+              <WinProbabilityBar
+                prediction={prediction}
+                homeTeam={match.homeTeam}
+                awayTeam={match.awayTeam}
+                liveOdds={liveOdds ?? undefined}
+              />
+              {loadingOdds && <p className="text-[10px] tracking-wider text-gray-600 mt-2">CHECKING POLYMARKET…</p>}
+            </div>
+          )}
+          {bettingSuggestions.length > 0 && (
+            <BettingSuggestions suggestions={bettingSuggestions} />
+          )}
+        </div>
 
-        {/* Soccer pitch */}
-        <div className="rounded-xl bg-gray-900 border border-gray-800 p-4">
+        {/* Pitch */}
+        <div className="border border-white/10 bg-white/[0.015] p-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wide">
-              Starting Lineup — Click a Player
-            </h3>
-            <span className="text-xs text-gray-600">4-3-3 formation</span>
+            <span className="text-[11px] tracking-[0.2em] text-gray-400">▸ STARTING XI — CLICK A PLAYER</span>
+            <span className="text-[10px] tracking-wider text-gray-600">4-3-3</span>
           </div>
           {allMatchPlayers.length > 0 ? (
             <SoccerPitch
@@ -167,46 +151,32 @@ export default function MatchDetailPage() {
               selectedPlayerId={selectedPlayer?.id}
             />
           ) : (
-            <div className="text-center py-10 text-gray-600 text-sm">
-              No lineup data available for this match.
-            </div>
+            <div className="text-center py-10 text-gray-600 text-sm tracking-wider">NO LINEUP DATA</div>
           )}
         </div>
 
-        {/* Betting suggestions */}
-        {bettingSuggestions.length > 0 && (
-          <div className="rounded-xl bg-gray-900 border border-gray-800 p-5">
-            <BettingSuggestions suggestions={bettingSuggestions} />
-          </div>
-        )}
-
-        {/* Team stat comparison */}
+        {/* Team stats */}
         {homeTeam && awayTeam && (
-          <div className="rounded-xl bg-gray-900 border border-gray-800 p-5">
-            <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wide mb-4">
-              Team Stats
-            </h3>
-            <div className="space-y-3">
+          <div className="border border-white/10 bg-white/[0.015] p-4">
+            <span className="text-[11px] tracking-[0.2em] text-gray-400">▸ TEAM COMPARISON</span>
+            <div className="mt-3 space-y-2">
               {[
-                { label: 'FIFA Ranking', home: `#${homeTeam.rank}`, away: `#${awayTeam.rank}`, invert: true },
-                { label: 'FIFA Points', home: homeTeam.points.toFixed(0), away: awayTeam.points.toFixed(0) },
-                { label: 'Avg Goals Scored', home: homeTeam.avgGoalsScored.toFixed(2), away: awayTeam.avgGoalsScored.toFixed(2) },
-                { label: 'Goals Scored (WC)', home: String(homeTeam.goalsScored), away: String(awayTeam.goalsScored) },
-                { label: 'Games Played', home: String(homeTeam.gamesPlayed), away: String(awayTeam.gamesPlayed) },
+                { label: 'FIFA RANKING', home: `#${homeTeam.rank}`, away: `#${awayTeam.rank}` },
+                { label: 'FIFA POINTS', home: homeTeam.points.toFixed(0), away: awayTeam.points.toFixed(0) },
+                { label: 'AVG GOALS SCORED', home: homeTeam.avgGoalsScored.toFixed(2), away: awayTeam.avgGoalsScored.toFixed(2) },
+                { label: 'PROJECTED xG', home: String(prediction?.xGHome ?? '–'), away: String(prediction?.xGAway ?? '–') },
               ].map(row => (
-                <div key={row.label} className="flex items-center gap-3 text-sm">
-                  <span className="text-white font-medium w-20 text-right">{row.home}</span>
-                  <span className="flex-1 text-center text-gray-600 text-xs">{row.label}</span>
-                  <span className="text-white font-medium w-20">{row.away}</span>
+                <div key={row.label} className="flex items-center gap-3 text-[12px] tabular-nums">
+                  <span className="text-accent w-16 text-right">{row.home}</span>
+                  <span className="flex-1 text-center text-gray-600 text-[10px] tracking-wider">{row.label}</span>
+                  <span className="text-sky-400 w-16">{row.away}</span>
                 </div>
               ))}
             </div>
           </div>
         )}
-
       </main>
 
-      {/* Player detail panel */}
       {selectedPlayer && playerProjection && (
         <PlayerDetailPanel
           player={selectedPlayer}

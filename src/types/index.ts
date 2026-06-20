@@ -79,7 +79,9 @@ export type BetType =
   | 'anytime-goalscorer'
   | 'btts'
   | 'asian-handicap'
-  | 'player-shots';
+  | 'player-shots'
+  | 'match-result'
+  | 'double-chance';
 
 export interface BettingSuggestion {
   type: BetType;

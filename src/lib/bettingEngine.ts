@@ -1,10 +1,69 @@
-import type { Player, Team, MatchPrediction, BettingSuggestion, PlayerProjection } from '../types';
+import type { Player, Team, MatchPrediction, BettingSuggestion, PlayerProjection, BetType } from '../types';
 
-function clamp(v: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, v));
+const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
+
+// Convert a hit probability into a plausible bookmaker decimal price (with margin).
+const MARGIN = 0.94;
+function toOdds(p: number): string {
+  const o = Math.max(1.04, (1 / clamp(p, 0.02, 0.98)) * MARGIN);
+  return `~${o.toFixed(2)}`;
 }
 
-/** Top-3 betting suggestions for a match */
+function mk(type: BetType, label: string, prob: number, rationale: string): BettingSuggestion {
+  return {
+    type,
+    label,
+    confidence: Math.round(clamp(prob, 0.02, 0.98) * 100),
+    oddsEstimate: toOdds(prob),
+    rationale,
+  };
+}
+
+// ── Poisson goal model ──────────────────────────────────────────────────────
+function poissonPmf(lambda: number, max = 8): number[] {
+  const out: number[] = [];
+  let p = Math.exp(-lambda);
+  for (let k = 0; k <= max; k++) {
+    out[k] = p;
+    p *= lambda / (k + 1);
+  }
+  return out;
+}
+
+interface Markets {
+  over25: number; over35: number; over15: number;
+  bttsYes: number;
+  homeBy2: number; awayBy2: number;
+}
+
+/** Exact market probabilities from the independent-Poisson goal matrix. */
+function computeMarkets(xgH: number, xgA: number): Markets {
+  const ph = poissonPmf(xgH);
+  const pa = poissonPmf(xgA);
+  let over15 = 0, over25 = 0, over35 = 0, bttsYes = 0, homeBy2 = 0, awayBy2 = 0;
+  for (let h = 0; h < ph.length; h++) {
+    for (let a = 0; a < pa.length; a++) {
+      const pr = ph[h] * pa[a];
+      if (!pr) continue;
+      if (h + a > 1) over15 += pr;
+      if (h + a > 2) over25 += pr;
+      if (h + a > 3) over35 += pr;
+      if (h >= 1 && a >= 1) bttsYes += pr;
+      if (h - a >= 2) homeBy2 += pr;
+      if (a - h >= 2) awayBy2 += pr;
+    }
+  }
+  return { over15, over25, over35, bttsYes, homeBy2, awayBy2 };
+}
+
+/**
+ * Three distinct, game-specific betting suggestions:
+ *   1. an outcome bet (result / handicap / double chance),
+ *   2. a goals or BTTS bet,
+ *   3. a player prop.
+ * Every probability is derived from this match's xG and lineup, so picks differ
+ * from game to game.
+ */
 export function generateBettingSuggestions(
   home: Team,
   away: Team,
@@ -12,191 +71,138 @@ export function generateBettingSuggestions(
   awayPlayers: Player[],
   prediction: MatchPrediction
 ): BettingSuggestion[] {
-  const suggestions: BettingSuggestion[] = [];
+  const m = computeMarkets(prediction.xGHome, prediction.xGAway);
   const totalXG = prediction.xGHome + prediction.xGAway;
+  const favHome = prediction.homeWin >= prediction.awayWin;
+  const fav = favHome ? home : away;
+  const dog = favHome ? away : home;
+  const favWin = favHome ? prediction.homeWin : prediction.awayWin;
+  const favBy2 = favHome ? m.homeBy2 : m.awayBy2;
 
-  // ── Pick 1: Over / Under 2.5 ──────────────────────────────────────────────
-  const overUnder = generateOverUnder(home, away, totalXG);
-  suggestions.push(overUnder);
-
-  // ── Pick 2: Anytime goalscorer ────────────────────────────────────────────
-  const scorer = generateAnytimeScorer([...homePlayers, ...awayPlayers]);
-  if (scorer) suggestions.push(scorer);
-
-  // ── Pick 3: Decision tree ─────────────────────────────────────────────────
-  const third = generateThirdPick(home, away, homePlayers, awayPlayers, prediction, totalXG);
-  suggestions.push(third);
-
-  return suggestions.slice(0, 3);
+  return [
+    outcomePick(fav, dog, favWin, prediction.draw, favBy2),
+    goalsPick(home, away, m, totalXG, prediction),
+    playerPick(homePlayers, awayPlayers, prediction),
+  ];
 }
 
-function generateOverUnder(home: Team, away: Team, totalXG: number): BettingSuggestion {
-  if (totalXG >= 2.6) {
-    const conf = clamp(50 + (totalXG - 2.5) * 35, 52, 88);
-    return {
-      type: 'over-under',
-      label: 'Over 2.5 Goals',
-      rationale: `Combined xG of ${totalXG.toFixed(1)} goals. ${home.name} avg ${home.avgGoalsScored.toFixed(1)} scored, ${away.name} avg ${away.avgGoalsScored.toFixed(1)} scored per game.`,
-      confidence: Math.round(conf),
-      oddsEstimate: totalXG >= 3.1 ? '~1.72' : '~1.85',
-    };
-  } else {
-    const conf = clamp(50 + (2.5 - totalXG) * 35, 52, 88);
-    return {
-      type: 'over-under',
-      label: 'Under 2.5 Goals',
-      rationale: `Combined xG of only ${totalXG.toFixed(1)} goals. Defensive matchup — ${home.name} (#${home.rank}) and ${away.name} (#${away.rank}) both ranked highly.`,
-      confidence: Math.round(conf),
-      oddsEstimate: totalXG <= 1.9 ? '~1.78' : '~1.92',
-    };
-  }
-}
-
-function generateAnytimeScorer(allPlayers: Player[]): BettingSuggestion | null {
-  const attackers = allPlayers.filter(
-    p => (p.position === 'FW' || p.position === 'MF') && !p.id.includes('unused')
-  );
-  if (attackers.length === 0) return null;
-
-  const scored = attackers.map(p => ({
-    player: p,
-    score: p.formScore * 0.5 + p.shotsOTP90 * 0.3 + p.goalsP90 * 1.5 + (p.goals > 0 ? 1.5 : 0),
-  }));
-  scored.sort((a, b) => b.score - a.score);
-  const best = scored[0];
-  const p = best.player;
-
-  const conf = clamp(45 + best.score * 2.5, 48, 78);
-  const odds = conf >= 65 ? '~2.50' : conf >= 55 ? '~3.20' : '~4.00';
-
-  return {
-    type: 'anytime-goalscorer',
-    label: `Anytime Goalscorer: ${p.name}`,
-    rationale: `${p.name} (${p.club || p.team}): ${p.goals} goal${p.goals !== 1 ? 's' : ''} in ${p.games} game${p.games !== 1 ? 's' : ''} at this tournament. ${p.shotsOTP90.toFixed(1)} shots on target/90 min. Form score ${p.formScore}/10.`,
-    confidence: Math.round(conf),
-    oddsEstimate: odds,
-  };
-}
-
-function generateThirdPick(
-  home: Team,
-  away: Team,
-  homePlayers: Player[],
-  awayPlayers: Player[],
-  prediction: MatchPrediction,
-  totalXG: number
+function outcomePick(
+  fav: Team, dog: Team, favWin: number, draw: number, favBy2: number
 ): BettingSuggestion {
-  const maxWin = Math.max(prediction.homeWin, prediction.awayWin);
-  const favourite = prediction.homeWin >= prediction.awayWin ? home : away;
+  const favP = favWin / 100;
 
-  if (maxWin >= 60) {
-    const handicap = maxWin >= 70 ? '-1' : '-0.5';
-    const conf = clamp(maxWin - 10, 50, 78);
-    const eloDiff = Math.abs(home.points - away.points);
-    return {
-      type: 'asian-handicap',
-      label: `${favourite.name} ${handicap} Asian Handicap`,
-      rationale: `FIFA points gap of ${Math.round(eloDiff)} and ${maxWin}% win probability suggests ${favourite.name} covers the ${handicap} handicap comfortably.`,
-      confidence: Math.round(conf),
-      oddsEstimate: handicap === '-1' ? '~1.90' : '~1.82',
-    };
+  if (favWin >= 66 && favBy2 >= 0.42) {
+    return mk('asian-handicap', `${fav.name} -1.5`, favBy2,
+      `${fav.name} are heavy favourites (${favWin}% to win). The model gives a ${(favBy2 * 100).toFixed(0)}% chance of a 2+ goal winning margin.`);
   }
-
-  const bothScore =
-    home.avgGoalsScored >= 1.1 && away.avgGoalsScored >= 1.0 && totalXG >= 2.2;
-  if (bothScore) {
-    const bttsConf = clamp((home.avgGoalsScored + away.avgGoalsScored - 2.0) * 22 + 52, 50, 78);
-    return {
-      type: 'btts',
-      label: 'Both Teams to Score (BTTS)',
-      rationale: `${home.name} avg ${home.avgGoalsScored.toFixed(1)} goals scored, ${away.name} avg ${away.avgGoalsScored.toFixed(1)} — both teams have the firepower to get on the scoresheet.`,
-      confidence: Math.round(bttsConf),
-      oddsEstimate: '~1.75',
-    };
+  if (favWin >= 52) {
+    return mk('match-result', `${fav.name} to Win`, favP,
+      `${fav.name} (#${fav.rank}) are favoured over ${dog.name} (#${dog.rank}) — ${favWin}% model win probability.`);
   }
-
-  // Fallback: top attacker shots prop
-  const allPlayers = [...homePlayers, ...awayPlayers];
-  const attackers = allPlayers.filter(p => p.position === 'FW' || p.position === 'MF');
-  attackers.sort((a, b) => b.shotsP90 - a.shotsP90);
-  const shotPick = attackers[0];
-  if (shotPick) {
-    const conf = clamp(shotPick.shotsP90 * 15 + 38, 44, 72);
-    return {
-      type: 'player-shots',
-      label: `${shotPick.name}: 2+ Shots on Target`,
-      rationale: `${shotPick.name} averages ${shotPick.shotsP90.toFixed(1)} shots per 90 min at this tournament. Likely to be heavily involved in attack.`,
-      confidence: Math.round(conf),
-      oddsEstimate: '~2.10',
-    };
-  }
-
-  return {
-    type: 'btts',
-    label: 'Both Teams to Score',
-    rationale: 'Competitive match expected with both sides looking to win.',
-    confidence: 55,
-    oddsEstimate: '~1.80',
-  };
+  const dc = clamp((favWin + draw) / 100, 0.3, 0.92);
+  return mk('double-chance', `${fav.name} or Draw`, dc,
+    `Tight matchup — ${fav.name} only ${favWin}% to win outright, but ${(dc * 100).toFixed(0)}% to avoid defeat (double chance).`);
 }
 
-/** Per-player projection for a match */
+function goalsPick(
+  home: Team, away: Team, m: Markets, totalXG: number, prediction: MatchPrediction
+): BettingSuggestion {
+  const cands: BettingSuggestion[] = [];
+
+  if (m.over25 >= 0.5) {
+    cands.push(mk('over-under', 'Over 2.5 Goals', m.over25,
+      `High-scoring projection — combined xG ${totalXG.toFixed(2)} (${home.name} ${prediction.xGHome}, ${away.name} ${prediction.xGAway}).`));
+  } else {
+    cands.push(mk('over-under', 'Under 2.5 Goals', 1 - m.over25,
+      `Low-scoring projection — combined xG only ${totalXG.toFixed(2)}.`));
+  }
+  if (m.over35 >= 0.5) {
+    cands.push(mk('over-under', 'Over 3.5 Goals', m.over35,
+      `Goal-heavy matchup — combined xG ${totalXG.toFixed(2)} points to four or more goals.`));
+  }
+  if (1 - m.over15 >= 0.4) {
+    cands.push(mk('over-under', 'Under 1.5 Goals', 1 - m.over15,
+      `Tight, defensive projection — combined xG only ${totalXG.toFixed(2)}.`));
+  }
+  if (m.bttsYes >= 0.5) {
+    cands.push(mk('btts', 'Both Teams to Score', m.bttsYes,
+      `Both sides project to find the net — ${home.name} xG ${prediction.xGHome}, ${away.name} xG ${prediction.xGAway}.`));
+  } else {
+    cands.push(mk('btts', 'Both Teams to Score: No', 1 - m.bttsYes,
+      `A clean sheet is on the cards — one side projects under 1.0 xG.`));
+  }
+
+  cands.sort((a, b) => b.confidence - a.confidence);
+  return cands[0];
+}
+
+function playerPick(
+  homePlayers: Player[], awayPlayers: Player[], prediction: MatchPrediction
+): BettingSuggestion {
+  const pool = [
+    ...homePlayers.map(p => ({ p, teamXG: prediction.xGHome })),
+    ...awayPlayers.map(p => ({ p, teamXG: prediction.xGAway })),
+  ].filter(x => x.p.position === 'FW' || x.p.position === 'MF');
+
+  if (pool.length === 0) {
+    return mk('anytime-goalscorer', 'Anytime Goalscorer', 0.3, 'Limited player data for this fixture.');
+  }
+
+  // Standout attacker by goal threat + form
+  const ranked = [...pool].sort((a, b) => threat(b.p) - threat(a.p));
+  const best = ranked[0];
+  const p = best.p;
+
+  const lambdaG = Math.max(p.goalsP90, 0.05) * (best.teamXG / 1.25);
+  const pScore = clamp(1 - Math.exp(-lambdaG), 0.12, 0.62);
+
+  if (pScore >= 0.3) {
+    return mk('anytime-goalscorer', `${p.name} to Score Anytime`, pScore,
+      `${p.name} (${p.club || p.team}) is the pick of the attack: ${p.goalsP90.toFixed(2)} goals/90, ${p.shotsOTP90.toFixed(1)} shots on target/90, form ${p.formScore}/10.`);
+  }
+
+  // Otherwise the most active shooter → shots-on-target prop
+  const shooter = [...pool].sort((a, b) => b.p.shotsOTP90 - a.p.shotsOTP90)[0];
+  const s = shooter.p;
+  const lamSot = Math.max(s.shotsOTP90, 0.1) * (shooter.teamXG / 1.25);
+  const p1 = 1 - poissonPmf(lamSot)[0];
+  return mk('player-shots', `${s.name}: 1+ Shot on Target`, clamp(p1, 0.3, 0.8),
+    `${s.name} averages ${s.shotsOTP90.toFixed(1)} shots on target/90 — the most active shooter in this matchup.`);
+}
+
+function threat(p: Player): number {
+  return p.goalsP90 * 1.5 + p.formScore * 0.12 + p.shotsOTP90 * 0.3 + (p.goals > 0 ? 0.4 : 0);
+}
+
+/** Per-player projection for a match (used by the player detail panel). */
 export function projectPlayerStats(player: Player, expectedMinutes = 90): PlayerProjection {
   const scale = expectedMinutes / 90;
 
-  const projectedGoals    = Math.round(player.goalsP90   * scale * 100) / 100;
-  const projectedAssists  = Math.round(player.assistsP90 * scale * 100) / 100;
-  const projectedShots    = Math.round(player.shotsP90   * scale * 10) / 10;
-  const projectedShotsOT  = Math.round(player.shotsOTP90 * scale * 10) / 10;
-  const projectedMinutes  = Math.min(expectedMinutes, player.starts > 0 ? 90 : 45);
+  const projectedGoals   = Math.round(player.goalsP90   * scale * 100) / 100;
+  const projectedAssists = Math.round(player.assistsP90 * scale * 100) / 100;
+  const projectedShots   = Math.round(player.shotsP90   * scale * 10) / 10;
+  const projectedShotsOT = Math.round(player.shotsOTP90 * scale * 10) / 10;
+  const projectedMinutes = Math.min(expectedMinutes, player.starts > 0 ? 90 : 45);
 
-  // Player-specific prop
   let propSuggestion: BettingSuggestion;
 
   if (player.position === 'GK') {
-    const conf = clamp(player.gkSavePct / 2 + 30, 40, 72);
-    propSuggestion = {
-      type: 'player-shots',
-      label: `${player.name}: 2+ Saves`,
-      rationale: `${player.name} has a ${player.gkSavePct.toFixed(0)}% save rate (${player.gkSaves} saves in ${player.games} game${player.games !== 1 ? 's' : ''}).`,
-      confidence: Math.round(conf),
-      oddsEstimate: '~1.65',
-    };
+    const p = clamp(player.gkSavePct / 140 + 0.35, 0.4, 0.82);
+    propSuggestion = mk('player-shots', `${player.name}: 2+ Saves`, p,
+      `${player.name} has a ${player.gkSavePct.toFixed(0)}% save rate (${player.gkSaves} saves in ${player.games} game${player.games !== 1 ? 's' : ''}).`);
   } else if (player.position === 'FW') {
-    const scorerConf = clamp(40 + player.goalsP90 * 60 + player.shotsOTP90 * 10, 35, 78);
-    propSuggestion = {
-      type: 'anytime-goalscorer',
-      label: `${player.name}: Anytime Scorer`,
-      rationale: `${player.goalsP90.toFixed(2)} goals/90 with ${player.shotsOTP90.toFixed(1)} shots on target per game. Form score ${player.formScore}/10.`,
-      confidence: Math.round(scorerConf),
-      oddsEstimate: scorerConf >= 60 ? '~2.50' : '~3.50',
-    };
+    const p = clamp(1 - Math.exp(-(Math.max(player.goalsP90, 0.08) + player.shotsOTP90 * 0.12)), 0.2, 0.65);
+    propSuggestion = mk('anytime-goalscorer', `${player.name}: Anytime Scorer`, p,
+      `${player.goalsP90.toFixed(2)} goals/90 with ${player.shotsOTP90.toFixed(1)} shots on target per game. Form score ${player.formScore}/10.`);
   } else if (player.position === 'MF') {
-    const assistConf = clamp(38 + player.assistsP90 * 50 + player.shotsOTP90 * 8, 35, 72);
-    propSuggestion = {
-      type: 'player-shots',
-      label: `${player.name}: 1+ Key Pass / Assist`,
-      rationale: `${player.assistsP90.toFixed(2)} assists/90 with ${player.shotsOTP90.toFixed(1)} shots on target per game. Creative midfielder.`,
-      confidence: Math.round(assistConf),
-      oddsEstimate: '~2.20',
-    };
+    const p = clamp(0.3 + player.assistsP90 * 0.35 + player.shotsOTP90 * 0.06, 0.28, 0.62);
+    propSuggestion = mk('player-shots', `${player.name}: 1+ Shot on Target`, p,
+      `${player.assistsP90.toFixed(2)} assists/90 with ${player.shotsOTP90.toFixed(1)} shots on target per game — a creative outlet.`);
   } else {
-    const defConf = clamp(40 + (player.interceptions + player.tacklesWon) * 2, 38, 68);
-    propSuggestion = {
-      type: 'player-shots',
-      label: `${player.name}: 1+ Tackle / Interception`,
-      rationale: `${player.tacklesWon} tackles won and ${player.interceptions} interceptions in ${player.games} game${player.games !== 1 ? 's' : ''}.`,
-      confidence: Math.round(defConf),
-      oddsEstimate: '~1.90',
-    };
+    const p = clamp(0.4 + (player.interceptions + player.tacklesWon) / Math.max(player.games, 1) * 0.06, 0.4, 0.75);
+    propSuggestion = mk('player-shots', `${player.name}: 1+ Tackle / Interception`, p,
+      `${player.tacklesWon} tackles won and ${player.interceptions} interceptions in ${player.games} game${player.games !== 1 ? 's' : ''}.`);
   }
 
-  return {
-    projectedGoals,
-    projectedAssists,
-    projectedShots,
-    projectedShotsOT,
-    projectedMinutes,
-    propSuggestion,
-  };
+  return { projectedGoals, projectedAssists, projectedShots, projectedShotsOT, projectedMinutes, propSuggestion };
 }

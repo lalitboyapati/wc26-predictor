@@ -1,27 +1,20 @@
 import type { BracketRound, BracketMatch, BracketTeam } from '../lib/bracket';
 import Flag from './Flag';
 
-function TeamRow({
-  team, goals, isWinner, side,
-}: {
+function TeamRow({ team, goals, isWinner, divider }: {
   team: BracketTeam | null;
   goals: number | null;
   isWinner: boolean;
-  side: 'home' | 'away';
+  divider: boolean;
 }) {
   return (
-    <div
-      className={`flex items-center gap-2 px-2 py-1.5 ${side === 'home' ? 'border-b border-gray-700/60' : ''}
-        ${isWinner ? 'bg-emerald-500/10' : ''}`}
-    >
-      <Flag code={team?.flagCode ?? ''} name={team?.name ?? ''} size={20} className="w-5 h-3.5 flex-shrink-0" />
-      <span className={`text-xs truncate flex-1 ${isWinner ? 'text-white font-semibold' : 'text-gray-400'}`}>
+    <div className={`flex items-center gap-2 px-2 py-1 ${divider ? 'border-b border-white/10' : ''} ${isWinner ? 'bg-accent/10' : ''}`}>
+      <Flag code={team?.flagCode ?? ''} name={team?.name ?? ''} size={20} className="w-4 h-[11px] flex-shrink-0" />
+      <span className={`text-[11px] truncate flex-1 ${isWinner ? 'text-white' : 'text-gray-500'}`}>
         {team?.name ?? 'TBD'}
       </span>
       {goals !== null && (
-        <span className={`text-xs font-mono font-bold ${isWinner ? 'text-emerald-400' : 'text-gray-600'}`}>
-          {goals}
-        </span>
+        <span className={`text-[11px] tabular-nums ${isWinner ? 'text-accent font-bold' : 'text-gray-600'}`}>{goals}</span>
       )}
     </div>
   );
@@ -29,9 +22,9 @@ function TeamRow({
 
 function MatchBox({ match }: { match: BracketMatch }) {
   return (
-    <div className="bg-gray-800/80 border border-gray-700 rounded-lg overflow-hidden w-44 shadow-md hover:border-gray-500 transition-colors">
-      <TeamRow team={match.home} goals={match.homeGoals} isWinner={match.winner === 'home'} side="home" />
-      <TeamRow team={match.away} goals={match.awayGoals} isWinner={match.winner === 'away'} side="away" />
+    <div className="border border-white/10 bg-white/[0.02] w-44 hover:border-accent/30 transition-colors">
+      <TeamRow team={match.home} goals={match.homeGoals} isWinner={match.winner === 'home'} divider />
+      <TeamRow team={match.away} goals={match.awayGoals} isWinner={match.winner === 'away'} divider={false} />
     </div>
   );
 }
@@ -44,39 +37,27 @@ export default function Bracket({ rounds }: { rounds: BracketRound[] }) {
   })();
 
   return (
-    <div className="space-y-6">
-      {/* Champion banner */}
+    <div className="space-y-5">
       {champion && (
         <div className="flex items-center justify-center">
-          <div className="flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-amber-500/20 border border-yellow-500/40">
-            <span className="text-2xl">🏆</span>
-            <div className="text-center">
-              <div className="text-[10px] uppercase tracking-widest text-yellow-500/80">Projected Champion</div>
-              <div className="flex items-center gap-2 mt-0.5">
-                <Flag code={champion.flagCode} name={champion.name} size={40} className="w-7 h-5" />
-                <span className="text-lg font-bold text-white">{champion.name}</span>
-              </div>
-            </div>
-            <span className="text-2xl">🏆</span>
+          <div className="flex items-center gap-3 px-5 py-2.5 border border-accent/40 bg-accent/[0.06]">
+            <span className="text-[10px] tracking-[0.2em] text-accent/70">PROJECTED CHAMPION</span>
+            <Flag code={champion.flagCode} name={champion.name} size={40} className="w-6 h-4" />
+            <span className="text-sm font-bold tracking-wider text-white">{champion.name.toUpperCase()}</span>
+            <span className="text-accent">★</span>
           </div>
         </div>
       )}
 
-      {/* Bracket — horizontal scroll on small screens */}
-      <div className="overflow-x-auto pb-4">
-        <div className="flex gap-6 min-w-max px-2">
+      <div className="overflow-x-auto pb-3">
+        <div className="flex gap-5 min-w-max px-1">
           {rounds.map((round, ri) => (
             <div key={round.name} className="flex flex-col">
-              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 text-center">
-                {round.name}
+              <h3 className="text-[10px] tracking-[0.2em] text-gray-600 mb-2.5 text-center">
+                {round.name.toUpperCase()}
               </h3>
-              <div
-                className="flex flex-col justify-around flex-1 gap-3"
-                style={{ minHeight: ri === 0 ? 'auto' : '100%' }}
-              >
-                {round.matches.map(m => (
-                  <MatchBox key={m.id} match={m} />
-                ))}
+              <div className="flex flex-col justify-around flex-1 gap-2.5" style={{ minHeight: ri === 0 ? 'auto' : '100%' }}>
+                {round.matches.map(m => <MatchBox key={m.id} match={m} />)}
               </div>
             </div>
           ))}

@@ -6,43 +6,50 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  background-color: #0a0a0f;
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.15), transparent),
-    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(236, 72, 153, 0.10), transparent);
-  background-attachment: fixed;
+:root {
+  --bg: #070a09;
+  --grid: rgba(52, 211, 153, 0.04);
 }
 
-/* Pitch SVG lines */
+html {
+  background-color: var(--bg);
+}
+
+body {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: #d4d8d5;
+  background-color: var(--bg);
+  /* faint terminal grid */
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 44px 44px;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.2px;
+}
+
+/* Pitch markings */
 .pitch-line {
-  stroke: rgba(255,255,255,0.55);
-  stroke-width: 2;
+  stroke: rgba(52, 211, 153, 0.35);
+  stroke-width: 1.5;
   fill: none;
 }
 
-/* Custom scrollbar for dark mode */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #1f2937;
-}
-::-webkit-scrollbar-thumb {
-  background: #4b5563;
-  border-radius: 3px;
-}
+/* Scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(52, 211, 153, 0.25); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: rgba(52, 211, 153, 0.4); }
 
-/* Smooth transitions for player panel */
-.player-panel-enter {
-  animation: slideUp 0.25s ease-out;
-}
-
+/* Panel slide-up (player detail) */
+.player-panel-enter { animation: slideUp 0.2s ease-out; }
 @keyframes slideUp {
-  from { transform: translateY(100%); opacity: 0; }
-  to   { transform: translateY(0);   opacity: 1; }
+  from { transform: translateY(12px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
 }
+
+/* Blinking status dot */
+.blink { animation: blink 1.6s step-start infinite; }
+@keyframes blink { 50% { opacity: 0.35; } }
