@@ -6,7 +6,7 @@ Everything is computed in the browser from static data — **no backend required
 
 > **Note:** The 2026 World Cup hasn't been played yet, so every scoreline, table, and bracket result is a **model prediction**, not a real result. The app is intentionally purely predictive. (Live betting odds, when available, are pulled in real time from Polymarket's public API and otherwise fall back to the model.)
 
-**Live demo:** _add your Vercel URL here after deploying_
+**Live demo:** **[wc26-predictor-olive.vercel.app](https://wc26-predictor-olive.vercel.app/)**
 
 ---
 
