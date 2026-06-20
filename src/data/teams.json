@@ -1,0 +1,434 @@
+{
+  "Mexico": {
+    "name": "Mexico",
+    "flagCode": "MEX",
+    "rank": 14,
+    "points": 1687.481759,
+    "gamesPlayed": 1,
+    "goalsScored": 2,
+    "avgGoalsScored": 2
+  },
+  "South Africa": {
+    "name": "South Africa",
+    "flagCode": "RSA",
+    "rank": 60,
+    "points": 1428.379282,
+    "gamesPlayed": 1,
+    "goalsScored": 0,
+    "avgGoalsScored": 0
+  },
+  "Korea Republic": {
+    "name": "Korea Republic",
+    "flagCode": "KOR",
+    "rank": 25,
+    "points": 1591.630886,
+    "gamesPlayed": 1,
+    "goalsScored": 2,
+    "avgGoalsScored": 2
+  },
+  "Czechia": {
+    "name": "Czechia",
+    "flagCode": "CZE",
+    "rank": 39,
+    "points": 1505.737856,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Canada": {
+    "name": "Canada",
+    "flagCode": "CAN",
+    "rank": 30,
+    "points": 1559.479301,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Bosnia-Herzegovina": {
+    "name": "Bosnia-Herzegovina",
+    "flagCode": "",
+    "rank": 80,
+    "points": 1300,
+    "gamesPlayed": 1,
+    "goalsScored": 0,
+    "avgGoalsScored": 1
+  },
+  "United States": {
+    "name": "United States",
+    "flagCode": "USA",
+    "rank": 17,
+    "points": 1671.2341,
+    "gamesPlayed": 1,
+    "goalsScored": 3,
+    "avgGoalsScored": 3
+  },
+  "Paraguay": {
+    "name": "Paraguay",
+    "flagCode": "PAR",
+    "rank": 40,
+    "points": 1505.349689,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Qatar": {
+    "name": "Qatar",
+    "flagCode": "QAT",
+    "rank": 57,
+    "points": 1450.307729,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Switzerland": {
+    "name": "Switzerland",
+    "flagCode": "SUI",
+    "rank": 19,
+    "points": 1650.064179,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Brazil": {
+    "name": "Brazil",
+    "flagCode": "BRA",
+    "rank": 6,
+    "points": 1765.856297,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Morocco": {
+    "name": "Morocco",
+    "flagCode": "MAR",
+    "rank": 7,
+    "points": 1755.100232,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Haiti": {
+    "name": "Haiti",
+    "flagCode": "HAI",
+    "rank": 83,
+    "points": 1293.096585,
+    "gamesPlayed": 1,
+    "goalsScored": 0,
+    "avgGoalsScored": 0
+  },
+  "Scotland": {
+    "name": "Scotland",
+    "flagCode": "SCO",
+    "rank": 42,
+    "points": 1503.34027,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Australia": {
+    "name": "Australia",
+    "flagCode": "AUS",
+    "rank": 27,
+    "points": 1579.34264,
+    "gamesPlayed": 1,
+    "goalsScored": 2,
+    "avgGoalsScored": 2
+  },
+  "Türkiye": {
+    "name": "Türkiye",
+    "flagCode": "TUR",
+    "rank": 22,
+    "points": 1605.730921,
+    "gamesPlayed": 1,
+    "goalsScored": 0,
+    "avgGoalsScored": 0
+  },
+  "Germany": {
+    "name": "Germany",
+    "flagCode": "GER",
+    "rank": 10,
+    "points": 1735.771984,
+    "gamesPlayed": 1,
+    "goalsScored": 7,
+    "avgGoalsScored": 7
+  },
+  "Curaçao": {
+    "name": "Curaçao",
+    "flagCode": "CUW",
+    "rank": 82,
+    "points": 1294.76909,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Netherlands": {
+    "name": "Netherlands",
+    "flagCode": "NED",
+    "rank": 8,
+    "points": 1751.097835,
+    "gamesPlayed": 1,
+    "goalsScored": 2,
+    "avgGoalsScored": 2
+  },
+  "Japan": {
+    "name": "Japan",
+    "flagCode": "JPN",
+    "rank": 18,
+    "points": 1661.576187,
+    "gamesPlayed": 1,
+    "goalsScored": 2,
+    "avgGoalsScored": 2
+  },
+  "Côte d'Ivoire": {
+    "name": "Côte d'Ivoire",
+    "flagCode": "CIV",
+    "rank": 33,
+    "points": 1540.869533,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Ecuador": {
+    "name": "Ecuador",
+    "flagCode": "ECU",
+    "rank": 23,
+    "points": 1598.51582,
+    "gamesPlayed": 1,
+    "goalsScored": 0,
+    "avgGoalsScored": 0
+  },
+  "Sweden": {
+    "name": "Sweden",
+    "flagCode": "SWE",
+    "rank": 38,
+    "points": 1509.785392,
+    "gamesPlayed": 1,
+    "goalsScored": 5,
+    "avgGoalsScored": 5
+  },
+  "Tunisia": {
+    "name": "Tunisia",
+    "flagCode": "TUN",
+    "rank": 46,
+    "points": 1476.405088,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Belgium": {
+    "name": "Belgium",
+    "flagCode": "BEL",
+    "rank": 9,
+    "points": 1742.235945,
+    "gamesPlayed": 1,
+    "goalsScored": 0,
+    "avgGoalsScored": 0
+  },
+  "Egypt": {
+    "name": "Egypt",
+    "flagCode": "EGY",
+    "rank": 29,
+    "points": 1562.367246,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Spain": {
+    "name": "Spain",
+    "flagCode": "ESP",
+    "rank": 2,
+    "points": 1873.013187,
+    "gamesPlayed": 1,
+    "goalsScored": 0,
+    "avgGoalsScored": 0
+  },
+  "Cape Verde": {
+    "name": "Cape Verde",
+    "flagCode": "",
+    "rank": 80,
+    "points": 1300,
+    "gamesPlayed": 1,
+    "goalsScored": 0,
+    "avgGoalsScored": 0
+  },
+  "IR Iran": {
+    "name": "IR Iran",
+    "flagCode": "IRN",
+    "rank": 20,
+    "points": 1619.58163,
+    "gamesPlayed": 1,
+    "goalsScored": 2,
+    "avgGoalsScored": 2
+  },
+  "New Zealand": {
+    "name": "New Zealand",
+    "flagCode": "NZL",
+    "rank": 85,
+    "points": 1275.581062,
+    "gamesPlayed": 1,
+    "goalsScored": 2,
+    "avgGoalsScored": 2
+  },
+  "Saudi Arabia": {
+    "name": "Saudi Arabia",
+    "flagCode": "KSA",
+    "rank": 61,
+    "points": 1421.538339,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Uruguay": {
+    "name": "Uruguay",
+    "flagCode": "URU",
+    "rank": 16,
+    "points": 1673.068603,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "France": {
+    "name": "France",
+    "flagCode": "FRA",
+    "rank": 3,
+    "points": 1869.428449,
+    "gamesPlayed": 1,
+    "goalsScored": 3,
+    "avgGoalsScored": 3
+  },
+  "Senegal": {
+    "name": "Senegal",
+    "flagCode": "SEN",
+    "rank": 15,
+    "points": 1686.412769,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Iraq": {
+    "name": "Iraq",
+    "flagCode": "IRQ",
+    "rank": 56,
+    "points": 1451.153466,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Norway": {
+    "name": "Norway",
+    "flagCode": "NOR",
+    "rank": 31,
+    "points": 1557.437664,
+    "gamesPlayed": 1,
+    "goalsScored": 3,
+    "avgGoalsScored": 3
+  },
+  "Argentina": {
+    "name": "Argentina",
+    "flagCode": "ARG",
+    "rank": 1,
+    "points": 1876.118331,
+    "gamesPlayed": 1,
+    "goalsScored": 3,
+    "avgGoalsScored": 3
+  },
+  "Algeria": {
+    "name": "Algeria",
+    "flagCode": "ALG",
+    "rank": 28,
+    "points": 1571.033293,
+    "gamesPlayed": 1,
+    "goalsScored": 0,
+    "avgGoalsScored": 0
+  },
+  "Austria": {
+    "name": "Austria",
+    "flagCode": "AUT",
+    "rank": 24,
+    "points": 1597.404087,
+    "gamesPlayed": 1,
+    "goalsScored": 2,
+    "avgGoalsScored": 2
+  },
+  "Jordan": {
+    "name": "Jordan",
+    "flagCode": "JOR",
+    "rank": 63,
+    "points": 1387.738222,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Portugal": {
+    "name": "Portugal",
+    "flagCode": "POR",
+    "rank": 5,
+    "points": 1766.177547,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Congo DR": {
+    "name": "Congo DR",
+    "flagCode": "COD",
+    "rank": 45,
+    "points": 1479.684122,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "England": {
+    "name": "England",
+    "flagCode": "ENG",
+    "rank": 4,
+    "points": 1827.048678,
+    "gamesPlayed": 1,
+    "goalsScored": 4,
+    "avgGoalsScored": 4
+  },
+  "Croatia": {
+    "name": "Croatia",
+    "flagCode": "CRO",
+    "rank": 11,
+    "points": 1714.865572,
+    "gamesPlayed": 1,
+    "goalsScored": 2,
+    "avgGoalsScored": 2
+  },
+  "Ghana": {
+    "name": "Ghana",
+    "flagCode": "GHA",
+    "rank": 73,
+    "points": 1346.881205,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Panama": {
+    "name": "Panama",
+    "flagCode": "PAN",
+    "rank": 34,
+    "points": 1539.155509,
+    "gamesPlayed": 1,
+    "goalsScored": 0,
+    "avgGoalsScored": 0
+  },
+  "Uzbekistan": {
+    "name": "Uzbekistan",
+    "flagCode": "UZB",
+    "rank": 50,
+    "points": 1461.208132,
+    "gamesPlayed": 1,
+    "goalsScored": 1,
+    "avgGoalsScored": 1
+  },
+  "Colombia": {
+    "name": "Colombia",
+    "flagCode": "COL",
+    "rank": 13,
+    "points": 1698.351858,
+    "gamesPlayed": 1,
+    "goalsScored": 3,
+    "avgGoalsScored": 3
+  }
+}

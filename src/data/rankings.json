@@ -1,0 +1,1479 @@
+{
+  "Argentina": {
+    "team": "Argentina",
+    "code": "ARG",
+    "rank": 1,
+    "points": 1876.118331,
+    "prevPoints": 1874.814835
+  },
+  "Spain": {
+    "team": "Spain",
+    "code": "ESP",
+    "rank": 2,
+    "points": 1873.013187,
+    "prevPoints": 1876.395199
+  },
+  "France": {
+    "team": "France",
+    "code": "FRA",
+    "rank": 3,
+    "points": 1869.428449,
+    "prevPoints": 1877.322731
+  },
+  "England": {
+    "team": "England",
+    "code": "ENG",
+    "rank": 4,
+    "points": 1827.048678,
+    "prevPoints": 1825.965482
+  },
+  "Portugal": {
+    "team": "Portugal",
+    "code": "POR",
+    "rank": 5,
+    "points": 1766.177547,
+    "prevPoints": 1763.834406
+  },
+  "Brazil": {
+    "team": "Brazil",
+    "code": "BRA",
+    "rank": 6,
+    "points": 1765.856297,
+    "prevPoints": 1761.16093
+  },
+  "Morocco": {
+    "team": "Morocco",
+    "code": "MAR",
+    "rank": 7,
+    "points": 1755.100232,
+    "prevPoints": 1755.86841
+  },
+  "Netherlands": {
+    "team": "Netherlands",
+    "code": "NED",
+    "rank": 8,
+    "points": 1751.097835,
+    "prevPoints": 1757.874428
+  },
+  "Belgium": {
+    "team": "Belgium",
+    "code": "BEL",
+    "rank": 9,
+    "points": 1742.235945,
+    "prevPoints": 1734.714832
+  },
+  "Germany": {
+    "team": "Germany",
+    "code": "GER",
+    "rank": 10,
+    "points": 1735.771984,
+    "prevPoints": 1730.37136
+  },
+  "Croatia": {
+    "team": "Croatia",
+    "code": "CRO",
+    "rank": 11,
+    "points": 1714.865572,
+    "prevPoints": 1717.066402
+  },
+  "Italy": {
+    "team": "Italy",
+    "code": "ITA",
+    "rank": 12,
+    "points": 1704.733836,
+    "prevPoints": 1700.370754
+  },
+  "Colombia": {
+    "team": "Colombia",
+    "code": "COL",
+    "rank": 13,
+    "points": 1698.351858,
+    "prevPoints": 1693.089319
+  },
+  "Mexico": {
+    "team": "Mexico",
+    "code": "MEX",
+    "rank": 14,
+    "points": 1687.481759,
+    "prevPoints": 1681.028247
+  },
+  "Senegal": {
+    "team": "Senegal",
+    "code": "SEN",
+    "rank": 15,
+    "points": 1686.412769,
+    "prevPoints": 1688.988837
+  },
+  "Uruguay": {
+    "team": "Uruguay",
+    "code": "URU",
+    "rank": 16,
+    "points": 1673.068603,
+    "prevPoints": 1673.068603
+  },
+  "USA": {
+    "team": "USA",
+    "code": "USA",
+    "rank": 17,
+    "points": 1671.2341,
+    "prevPoints": 1673.126608
+  },
+  "Japan": {
+    "team": "Japan",
+    "code": "JPN",
+    "rank": 18,
+    "points": 1661.576187,
+    "prevPoints": 1660.427891
+  },
+  "Switzerland": {
+    "team": "Switzerland",
+    "code": "SUI",
+    "rank": 19,
+    "points": 1650.064179,
+    "prevPoints": 1649.39683
+  },
+  "IR Iran": {
+    "team": "IR Iran",
+    "code": "IRN",
+    "rank": 20,
+    "points": 1619.58163,
+    "prevPoints": 1615.300338
+  },
+  "Denmark": {
+    "team": "Denmark",
+    "code": "DEN",
+    "rank": 21,
+    "points": 1619.474248,
+    "prevPoints": 1620.807946
+  },
+  "Türkiye": {
+    "team": "Türkiye",
+    "code": "TUR",
+    "rank": 22,
+    "points": 1605.730921,
+    "prevPoints": 1599.03767
+  },
+  "Ecuador": {
+    "team": "Ecuador",
+    "code": "ECU",
+    "rank": 23,
+    "points": 1598.51582,
+    "prevPoints": 1594.78386
+  },
+  "Austria": {
+    "team": "Austria",
+    "code": "AUT",
+    "rank": 24,
+    "points": 1597.404087,
+    "prevPoints": 1593.447673
+  },
+  "Korea Republic": {
+    "team": "Korea Republic",
+    "code": "KOR",
+    "rank": 25,
+    "points": 1591.630886,
+    "prevPoints": 1588.663904
+  },
+  "Nigeria": {
+    "team": "Nigeria",
+    "code": "NGA",
+    "rank": 26,
+    "points": 1586.688586,
+    "prevPoints": 1585.086373
+  },
+  "Australia": {
+    "team": "Australia",
+    "code": "AUS",
+    "rank": 27,
+    "points": 1579.34264,
+    "prevPoints": 1580.674774
+  },
+  "Algeria": {
+    "team": "Algeria",
+    "code": "ALG",
+    "rank": 28,
+    "points": 1571.033293,
+    "prevPoints": 1564.2567
+  },
+  "Egypt": {
+    "team": "Egypt",
+    "code": "EGY",
+    "rank": 29,
+    "points": 1562.367246,
+    "prevPoints": 1563.241764
+  },
+  "Canada": {
+    "team": "Canada",
+    "code": "CAN",
+    "rank": 30,
+    "points": 1559.479301,
+    "prevPoints": 1556.482247
+  },
+  "Norway": {
+    "team": "Norway",
+    "code": "NOR",
+    "rank": 31,
+    "points": 1557.437664,
+    "prevPoints": 1550.943159
+  },
+  "Ukraine": {
+    "team": "Ukraine",
+    "code": "UKR",
+    "rank": 32,
+    "points": 1549.287173,
+    "prevPoints": 1546.877672
+  },
+  "Côte d'Ivoire": {
+    "team": "Côte d'Ivoire",
+    "code": "CIV",
+    "rank": 33,
+    "points": 1540.869533,
+    "prevPoints": 1532.975251
+  },
+  "Panama": {
+    "team": "Panama",
+    "code": "PAN",
+    "rank": 34,
+    "points": 1539.155509,
+    "prevPoints": 1540.644228
+  },
+  "Russia": {
+    "team": "Russia",
+    "code": "RUS",
+    "rank": 35,
+    "points": 1527.237131,
+    "prevPoints": 1525.604093
+  },
+  "Poland": {
+    "team": "Poland",
+    "code": "POL",
+    "rank": 36,
+    "points": 1526.183359,
+    "prevPoints": 1528.003812
+  },
+  "Wales": {
+    "team": "Wales",
+    "code": "WAL",
+    "rank": 37,
+    "points": 1516.946629,
+    "prevPoints": 1524.290508
+  },
+  "Sweden": {
+    "team": "Sweden",
+    "code": "SWE",
+    "rank": 38,
+    "points": 1509.785392,
+    "prevPoints": 1514.767421
+  },
+  "Czechia": {
+    "team": "Czechia",
+    "code": "CZE",
+    "rank": 39,
+    "points": 1505.737856,
+    "prevPoints": 1501.3824
+  },
+  "Paraguay": {
+    "team": "Paraguay",
+    "code": "PAR",
+    "rank": 40,
+    "points": 1505.349689,
+    "prevPoints": 1503.503339
+  },
+  "Hungary": {
+    "team": "Hungary",
+    "code": "HUN",
+    "rank": 41,
+    "points": 1504.135797,
+    "prevPoints": 1500.581454
+  },
+  "Scotland": {
+    "team": "Scotland",
+    "code": "SCO",
+    "rank": 42,
+    "points": 1503.34027,
+    "prevPoints": 1498.350389
+  },
+  "Serbia": {
+    "team": "Serbia",
+    "code": "SRB",
+    "rank": 43,
+    "points": 1502.133186,
+    "prevPoints": 1508.650488
+  },
+  "Cameroon": {
+    "team": "Cameroon",
+    "code": "CMR",
+    "rank": 44,
+    "points": 1481.235245,
+    "prevPoints": 1481.235245
+  },
+  "Congo DR": {
+    "team": "Congo DR",
+    "code": "COD",
+    "rank": 45,
+    "points": 1479.684122,
+    "prevPoints": 1478.350424
+  },
+  "Tunisia": {
+    "team": "Tunisia",
+    "code": "TUN",
+    "rank": 46,
+    "points": 1476.405088,
+    "prevPoints": 1483.051871
+  },
+  "Slovakia": {
+    "team": "Slovakia",
+    "code": "SVK",
+    "rank": 47,
+    "points": 1473.660727,
+    "prevPoints": 1473.938441
+  },
+  "Greece": {
+    "team": "Greece",
+    "code": "GRE",
+    "rank": 48,
+    "points": 1473.187305,
+    "prevPoints": 1475.819913
+  },
+  "Venezuela": {
+    "team": "Venezuela",
+    "code": "VEN",
+    "rank": 49,
+    "points": 1464.303811,
+    "prevPoints": 1468.046323
+  },
+  "Uzbekistan": {
+    "team": "Uzbekistan",
+    "code": "UZB",
+    "rank": 50,
+    "points": 1461.208132,
+    "prevPoints": 1465.342534
+  },
+  "Peru": {
+    "team": "Peru",
+    "code": "PER",
+    "rank": 51,
+    "points": 1459.390555,
+    "prevPoints": 1455.872645
+  },
+  "Costa Rica": {
+    "team": "Costa Rica",
+    "code": "CRC",
+    "rank": 52,
+    "points": 1457.00228,
+    "prevPoints": 1459.903309
+  },
+  "Romania": {
+    "team": "Romania",
+    "code": "ROU",
+    "rank": 53,
+    "points": 1455.894657,
+    "prevPoints": 1451.161007
+  },
+  "Mali": {
+    "team": "Mali",
+    "code": "MLI",
+    "rank": 54,
+    "points": 1455.586659,
+    "prevPoints": 1459.125074
+  },
+  "Chile": {
+    "team": "Chile",
+    "code": "CHI",
+    "rank": 55,
+    "points": 1452.939983,
+    "prevPoints": 1455.283124
+  },
+  "Iraq": {
+    "team": "Iraq",
+    "code": "IRQ",
+    "rank": 56,
+    "points": 1451.153466,
+    "prevPoints": 1447.135319
+  },
+  "Qatar": {
+    "team": "Qatar",
+    "code": "QAT",
+    "rank": 57,
+    "points": 1450.307729,
+    "prevPoints": 1454.958587
+  },
+  "Republic of Ireland": {
+    "team": "Republic of Ireland",
+    "code": "IRL",
+    "rank": 58,
+    "points": 1441.096901,
+    "prevPoints": 1436.630274
+  },
+  "Slovenia": {
+    "team": "Slovenia",
+    "code": "SVN",
+    "rank": 59,
+    "points": 1441.087158,
+    "prevPoints": 1446.439067
+  },
+  "South Africa": {
+    "team": "South Africa",
+    "code": "RSA",
+    "rank": 60,
+    "points": 1428.379282,
+    "prevPoints": 1429.728396
+  },
+  "Saudi Arabia": {
+    "team": "Saudi Arabia",
+    "code": "KSA",
+    "rank": 61,
+    "points": 1421.538339,
+    "prevPoints": 1421.427596
+  },
+  "Burkina Faso": {
+    "team": "Burkina Faso",
+    "code": "BFA",
+    "rank": 62,
+    "points": 1408.541965,
+    "prevPoints": 1412.494766
+  },
+  "Jordan": {
+    "team": "Jordan",
+    "code": "JOR",
+    "rank": 63,
+    "points": 1387.738222,
+    "prevPoints": 1391.4544
+  },
+  "Bosnia and Herzegovina": {
+    "team": "Bosnia and Herzegovina",
+    "code": "BIH",
+    "rank": 64,
+    "points": 1387.215771,
+    "prevPoints": 1385.838723
+  },
+  "Honduras": {
+    "team": "Honduras",
+    "code": "HON",
+    "rank": 65,
+    "points": 1378.970301,
+    "prevPoints": 1380.273797
+  },
+  "Albania": {
+    "team": "Albania",
+    "code": "ALB",
+    "rank": 66,
+    "points": 1376.033234,
+    "prevPoints": 1388.058361
+  },
+  "Cabo Verde": {
+    "team": "Cabo Verde",
+    "code": "CPV",
+    "rank": 67,
+    "points": 1371.10798,
+    "prevPoints": 1366.125478
+  },
+  "United Arab Emirates": {
+    "team": "United Arab Emirates",
+    "code": "UAE",
+    "rank": 68,
+    "points": 1370.469434,
+    "prevPoints": 1370.469434
+  },
+  "North Macedonia": {
+    "team": "North Macedonia",
+    "code": "MKD",
+    "rank": 69,
+    "points": 1369.159317,
+    "prevPoints": 1372.043897
+  },
+  "Northern Ireland": {
+    "team": "Northern Ireland",
+    "code": "NIR",
+    "rank": 70,
+    "points": 1366.564198,
+    "prevPoints": 1362.157683
+  },
+  "Jamaica": {
+    "team": "Jamaica",
+    "code": "JAM",
+    "rank": 71,
+    "points": 1357.840144,
+    "prevPoints": 1357.996558
+  },
+  "Georgia": {
+    "team": "Georgia",
+    "code": "GEO",
+    "rank": 72,
+    "points": 1355.261687,
+    "prevPoints": 1350.184155
+  },
+  "Ghana": {
+    "team": "Ghana",
+    "code": "GHA",
+    "rank": 73,
+    "points": 1346.881205,
+    "prevPoints": 1346.311722
+  },
+  "Iceland": {
+    "team": "Iceland",
+    "code": "ISL",
+    "rank": 74,
+    "points": 1343.920201,
+    "prevPoints": 1345.068497
+  },
+  "Finland": {
+    "team": "Finland",
+    "code": "FIN",
+    "rank": 75,
+    "points": 1341.922408,
+    "prevPoints": 1346.408799
+  },
+  "Israel": {
+    "team": "Israel",
+    "code": "ISR",
+    "rank": 76,
+    "points": 1333.904007,
+    "prevPoints": 1328.333496
+  },
+  "Bolivia": {
+    "team": "Bolivia",
+    "code": "BOL",
+    "rank": 77,
+    "points": 1325.995377,
+    "prevPoints": 1329.415509
+  },
+  "Kosovo": {
+    "team": "Kosovo",
+    "code": "KOS",
+    "rank": 78,
+    "points": 1319.120924,
+    "prevPoints": 1318.82527
+  },
+  "Oman": {
+    "team": "Oman",
+    "code": "OMA",
+    "rank": 79,
+    "points": 1306.901717,
+    "prevPoints": 1313.464945
+  },
+  "Montenegro": {
+    "team": "Montenegro",
+    "code": "MNE",
+    "rank": 80,
+    "points": 1301.977191,
+    "prevPoints": 1295.518644
+  },
+  "Guinea": {
+    "team": "Guinea",
+    "code": "GUI",
+    "rank": 81,
+    "points": 1295.598845,
+    "prevPoints": 1300.00536
+  },
+  "Curaçao": {
+    "team": "Curaçao",
+    "code": "CUW",
+    "rank": 82,
+    "points": 1294.76909,
+    "prevPoints": 1294.652918
+  },
+  "Haiti": {
+    "team": "Haiti",
+    "code": "HAI",
+    "rank": 83,
+    "points": 1293.096585,
+    "prevPoints": 1291.711814
+  },
+  "Syria": {
+    "team": "Syria",
+    "code": "SYR",
+    "rank": 84,
+    "points": 1283.051902,
+    "prevPoints": 1288.556135
+  },
+  "New Zealand": {
+    "team": "New Zealand",
+    "code": "NZL",
+    "rank": 85,
+    "points": 1275.581062,
+    "prevPoints": 1281.566939
+  },
+  "Gabon": {
+    "team": "Gabon",
+    "code": "GAB",
+    "rank": 86,
+    "points": 1272.508139,
+    "prevPoints": 1272.508139
+  },
+  "Bulgaria": {
+    "team": "Bulgaria",
+    "code": "BUL",
+    "rank": 87,
+    "points": 1271.683325,
+    "prevPoints": 1278.904375
+  },
+  "Uganda": {
+    "team": "Uganda",
+    "code": "UGA",
+    "rank": 88,
+    "points": 1264.090591,
+    "prevPoints": 1264.090591
+  },
+  "Angola": {
+    "team": "Angola",
+    "code": "ANG",
+    "rank": 89,
+    "points": 1262.219698,
+    "prevPoints": 1263.096811
+  },
+  "Benin": {
+    "team": "Benin",
+    "code": "BEN",
+    "rank": 90,
+    "points": 1258.224853,
+    "prevPoints": 1258.980021
+  },
+  "Zambia": {
+    "team": "Zambia",
+    "code": "ZAM",
+    "rank": 91,
+    "points": 1255.821846,
+    "prevPoints": 1255.821846
+  },
+  "China PR": {
+    "team": "China PR",
+    "code": "CHN",
+    "rank": 92,
+    "points": 1254.848285,
+    "prevPoints": 1251.597821
+  },
+  "Bahrain": {
+    "team": "Bahrain",
+    "code": "BHR",
+    "rank": 93,
+    "points": 1254.406799,
+    "prevPoints": 1258.527492
+  },
+  "Thailand": {
+    "team": "Thailand",
+    "code": "THA",
+    "rank": 94,
+    "points": 1250.763879,
+    "prevPoints": 1252.138301
+  },
+  "Palestine": {
+    "team": "Palestine",
+    "code": "PLE",
+    "rank": 95,
+    "points": 1244.216499,
+    "prevPoints": 1244.728802
+  },
+  "Belarus": {
+    "team": "Belarus",
+    "code": "BLR",
+    "rank": 96,
+    "points": 1241.324607,
+    "prevPoints": 1235.820374
+  },
+  "Guatemala": {
+    "team": "Guatemala",
+    "code": "GUA",
+    "rank": 97,
+    "points": 1238.74375,
+    "prevPoints": 1243.474984
+  },
+  "Luxembourg": {
+    "team": "Luxembourg",
+    "code": "LUX",
+    "rank": 98,
+    "points": 1232.81815,
+    "prevPoints": 1227.765462
+  },
+  "Vietnam": {
+    "team": "Vietnam",
+    "code": "VIE",
+    "rank": 99,
+    "points": 1225.67943,
+    "prevPoints": 1225.67943
+  },
+  "Tajikistan": {
+    "team": "Tajikistan",
+    "code": "TJK",
+    "rank": 100,
+    "points": 1225.518979,
+    "prevPoints": 1221.78095
+  },
+  "El Salvador": {
+    "team": "El Salvador",
+    "code": "SLV",
+    "rank": 101,
+    "points": 1225.344607,
+    "prevPoints": 1225.25876
+  },
+  "Mozambique": {
+    "team": "Mozambique",
+    "code": "MOZ",
+    "rank": 102,
+    "points": 1224.311107,
+    "prevPoints": 1224.311107
+  },
+  "Trinidad and Tobago": {
+    "team": "Trinidad and Tobago",
+    "code": "TRI",
+    "rank": 103,
+    "points": 1221.951833,
+    "prevPoints": 1222.93812
+  },
+  "Madagascar": {
+    "team": "Madagascar",
+    "code": "MAD",
+    "rank": 104,
+    "points": 1202.689766,
+    "prevPoints": 1203.76261
+  },
+  "Equatorial Guinea": {
+    "team": "Equatorial Guinea",
+    "code": "EQG",
+    "rank": 105,
+    "points": 1195.197081,
+    "prevPoints": 1195.197081
+  },
+  "Kyrgyz Republic": {
+    "team": "Kyrgyz Republic",
+    "code": "KGZ",
+    "rank": 106,
+    "points": 1191.655395,
+    "prevPoints": 1191.143092
+  },
+  "Armenia": {
+    "team": "Armenia",
+    "code": "ARM",
+    "rank": 107,
+    "points": 1191.334973,
+    "prevPoints": 1191.416122
+  },
+  "Comoros": {
+    "team": "Comoros",
+    "code": "COM",
+    "rank": 108,
+    "points": 1187.9109,
+    "prevPoints": 1187.9109
+  },
+  "Kenya": {
+    "team": "Kenya",
+    "code": "KEN",
+    "rank": 109,
+    "points": 1185.076631,
+    "prevPoints": 1182.230045
+  },
+  "Kazakhstan": {
+    "team": "Kazakhstan",
+    "code": "KAZ",
+    "rank": 110,
+    "points": 1183.038315,
+    "prevPoints": 1182.957166
+  },
+  "Libya": {
+    "team": "Libya",
+    "code": "LBY",
+    "rank": 111,
+    "points": 1182.081264,
+    "prevPoints": 1182.081264
+  },
+  "Niger": {
+    "team": "Niger",
+    "code": "NIG",
+    "rank": 112,
+    "points": 1180.416678,
+    "prevPoints": 1179.66151
+  },
+  "Tanzania": {
+    "team": "Tanzania",
+    "code": "TAN",
+    "rank": 113,
+    "points": 1180.267847,
+    "prevPoints": 1180.267847
+  },
+  "Lebanon": {
+    "team": "Lebanon",
+    "code": "LBN",
+    "rank": 114,
+    "points": 1172.215162,
+    "prevPoints": 1187.960362
+  },
+  "Mauritania": {
+    "team": "Mauritania",
+    "code": "MTN",
+    "rank": 115,
+    "points": 1171.596379,
+    "prevPoints": 1170.719266
+  },
+  "The Gambia": {
+    "team": "The Gambia",
+    "code": "GAM",
+    "rank": 116,
+    "points": 1159.637808,
+    "prevPoints": 1160.380685
+  },
+  "Sudan": {
+    "team": "Sudan",
+    "code": "SDN",
+    "rank": 117,
+    "points": 1157.223901,
+    "prevPoints": 1157.223901
+  },
+  "Sierra Leone": {
+    "team": "Sierra Leone",
+    "code": "SLE",
+    "rank": 118,
+    "points": 1153.309176,
+    "prevPoints": 1148.976347
+  },
+  "Indonesia": {
+    "team": "Indonesia",
+    "code": "IDN",
+    "rank": 119,
+    "points": 1151.448115,
+    "prevPoints": 1144.884887
+  },
+  "Korea DPR": {
+    "team": "Korea DPR",
+    "code": "PRK",
+    "rank": 120,
+    "points": 1151.052136,
+    "prevPoints": 1151.052136
+  },
+  "Namibia": {
+    "team": "Namibia",
+    "code": "NAM",
+    "rank": 121,
+    "points": 1148.839695,
+    "prevPoints": 1148.839695
+  },
+  "Togo": {
+    "team": "Togo",
+    "code": "TOG",
+    "rank": 122,
+    "points": 1146.703618,
+    "prevPoints": 1147.31212
+  },
+  "Cyprus": {
+    "team": "Cyprus",
+    "code": "CYP",
+    "rank": 123,
+    "points": 1133.247165,
+    "prevPoints": 1128.334119
+  },
+  "Suriname": {
+    "team": "Suriname",
+    "code": "SUR",
+    "rank": 124,
+    "points": 1132.425895,
+    "prevPoints": 1132.425895
+  },
+  "Faroe Islands": {
+    "team": "Faroe Islands",
+    "code": "FRO",
+    "rank": 125,
+    "points": 1131.984479,
+    "prevPoints": 1137.138273
+  },
+  "Azerbaijan": {
+    "team": "Azerbaijan",
+    "code": "AZE",
+    "rank": 126,
+    "points": 1130.263211,
+    "prevPoints": 1136.6663
+  },
+  "Rwanda": {
+    "team": "Rwanda",
+    "code": "RWA",
+    "rank": 127,
+    "points": 1126.622275,
+    "prevPoints": 1126.622275
+  },
+  "Estonia": {
+    "team": "Estonia",
+    "code": "EST",
+    "rank": 128,
+    "points": 1126.256951,
+    "prevPoints": 1121.103157
+  },
+  "Malawi": {
+    "team": "Malawi",
+    "code": "MWI",
+    "rank": 129,
+    "points": 1122.488082,
+    "prevPoints": 1128.027858
+  },
+  "Zimbabwe": {
+    "team": "Zimbabwe",
+    "code": "ZIM",
+    "rank": 130,
+    "points": 1119.77695,
+    "prevPoints": 1118.123833
+  },
+  "Nicaragua": {
+    "team": "Nicaragua",
+    "code": "NCA",
+    "rank": 131,
+    "points": 1114.634184,
+    "prevPoints": 1115.13142
+  },
+  "Guinea-Bissau": {
+    "team": "Guinea-Bissau",
+    "code": "GNB",
+    "rank": 132,
+    "points": 1108.381553,
+    "prevPoints": 1108.381553
+  },
+  "Kuwait": {
+    "team": "Kuwait",
+    "code": "KUW",
+    "rank": 133,
+    "points": 1106.474587,
+    "prevPoints": 1105.100165
+  },
+  "Congo": {
+    "team": "Congo",
+    "code": "CGO",
+    "rank": 134,
+    "points": 1105.964661,
+    "prevPoints": 1105.964661
+  },
+  "Philippines": {
+    "team": "Philippines",
+    "code": "PHI",
+    "rank": 135,
+    "points": 1096.72639,
+    "prevPoints": 1094.097577
+  },
+  "Latvia": {
+    "team": "Latvia",
+    "code": "LVA",
+    "rank": 136,
+    "points": 1090.261315,
+    "prevPoints": 1090.569353
+  },
+  "Malaysia": {
+    "team": "Malaysia",
+    "code": "MAS",
+    "rank": 137,
+    "points": 1086.218087,
+    "prevPoints": 1086.218087
+  },
+  "Central African Republic": {
+    "team": "Central African Republic",
+    "code": "CTA",
+    "rank": 138,
+    "points": 1084.180103,
+    "prevPoints": 1083.571601
+  },
+  "India": {
+    "team": "India",
+    "code": "IND",
+    "rank": 139,
+    "points": 1083.601894,
+    "prevPoints": 1091.027887
+  },
+  "Turkmenistan": {
+    "team": "Turkmenistan",
+    "code": "TKM",
+    "rank": 140,
+    "points": 1078.652346,
+    "prevPoints": 1078.652346
+  },
+  "Burundi": {
+    "team": "Burundi",
+    "code": "BDI",
+    "rank": 141,
+    "points": 1078.009468,
+    "prevPoints": 1078.009468
+  },
+  "Ethiopia": {
+    "team": "Ethiopia",
+    "code": "ETH",
+    "rank": 142,
+    "points": 1077.086308,
+    "prevPoints": 1071.546532
+  },
+  "Dominican Republic": {
+    "team": "Dominican Republic",
+    "code": "DOM",
+    "rank": 143,
+    "points": 1076.498501,
+    "prevPoints": 1077.954075
+  },
+  "Liberia": {
+    "team": "Liberia",
+    "code": "LBR",
+    "rank": 144,
+    "points": 1074.686684,
+    "prevPoints": 1079.019513
+  },
+  "Yemen": {
+    "team": "Yemen",
+    "code": "YEM",
+    "rank": 145,
+    "points": 1065.236881,
+    "prevPoints": 1049.491681
+  },
+  "Lesotho": {
+    "team": "Lesotho",
+    "code": "LES",
+    "rank": 146,
+    "points": 1064.285838,
+    "prevPoints": 1067.132424
+  },
+  "Botswana": {
+    "team": "Botswana",
+    "code": "BOT",
+    "rank": 147,
+    "points": 1063.631368,
+    "prevPoints": 1063.631368
+  },
+  "Lithuania": {
+    "team": "Lithuania",
+    "code": "LTU",
+    "rank": 148,
+    "points": 1061.22966,
+    "prevPoints": 1058.421622
+  },
+  "Singapore": {
+    "team": "Singapore",
+    "code": "SGP",
+    "rank": 149,
+    "points": 1057.950212,
+    "prevPoints": 1059.530429
+  },
+  "Guyana": {
+    "team": "Guyana",
+    "code": "GUY",
+    "rank": 150,
+    "points": 1049.320241,
+    "prevPoints": 1049.320241
+  },
+  "New Caledonia": {
+    "team": "New Caledonia",
+    "code": "NCL",
+    "rank": 151,
+    "points": 1036.952253,
+    "prevPoints": 1036.952253
+  },
+  "St Kitts and Nevis": {
+    "team": "St Kitts and Nevis",
+    "code": "SKN",
+    "rank": 152,
+    "points": 1036.334924,
+    "prevPoints": 1036.334924
+  },
+  "Solomon Islands": {
+    "team": "Solomon Islands",
+    "code": "SOL",
+    "rank": 153,
+    "points": 1031.894156,
+    "prevPoints": 1031.894156
+  },
+  "Hong Kong, China": {
+    "team": "Hong Kong, China",
+    "code": "HKG",
+    "rank": 154,
+    "points": 1030.240953,
+    "prevPoints": 1026.628751
+  },
+  "Fiji": {
+    "team": "Fiji",
+    "code": "FIJ",
+    "rank": 155,
+    "points": 1024.384218,
+    "prevPoints": 1029.697455
+  },
+  "Puerto Rico": {
+    "team": "Puerto Rico",
+    "code": "PUR",
+    "rank": 156,
+    "points": 1024.297312,
+    "prevPoints": 1026.105829
+  },
+  "Tahiti": {
+    "team": "Tahiti",
+    "code": "TAH",
+    "rank": 157,
+    "points": 1019.036032,
+    "prevPoints": 1019.036032
+  },
+  "Myanmar": {
+    "team": "Myanmar",
+    "code": "MYA",
+    "rank": 158,
+    "points": 1015.138408,
+    "prevPoints": 1011.876799
+  },
+  "Moldova": {
+    "team": "Moldova",
+    "code": "MDA",
+    "rank": 159,
+    "points": 1006.537824,
+    "prevPoints": 1004.157429
+  },
+  "Vanuatu": {
+    "team": "Vanuatu",
+    "code": "VAN",
+    "rank": 160,
+    "points": 1002.318941,
+    "prevPoints": 997.005704
+  },
+  "Malta": {
+    "team": "Malta",
+    "code": "MLT",
+    "rank": 161,
+    "points": 992.793497,
+    "prevPoints": 987.730586
+  },
+  "Antigua and Barbuda": {
+    "team": "Antigua and Barbuda",
+    "code": "ATG",
+    "rank": 162,
+    "points": 986.584414,
+    "prevPoints": 986.584414
+  },
+  "Grenada": {
+    "team": "Grenada",
+    "code": "GRN",
+    "rank": 163,
+    "points": 981.823973,
+    "prevPoints": 982.568936
+  },
+  "Cuba": {
+    "team": "Cuba",
+    "code": "CUB",
+    "rank": 164,
+    "points": 981.423455,
+    "prevPoints": 981.423455
+  },
+  "Eswatini": {
+    "team": "Eswatini",
+    "code": "SWZ",
+    "rank": 165,
+    "points": 979.013939,
+    "prevPoints": 979.013939
+  },
+  "St Lucia": {
+    "team": "St Lucia",
+    "code": "LCA",
+    "rank": 166,
+    "points": 976.708996,
+    "prevPoints": 976.708996
+  },
+  "Bermuda": {
+    "team": "Bermuda",
+    "code": "BER",
+    "rank": 167,
+    "points": 975.053746,
+    "prevPoints": 976.869098
+  },
+  "Papua New Guinea": {
+    "team": "Papua New Guinea",
+    "code": "PNG",
+    "rank": 168,
+    "points": 974.9011,
+    "prevPoints": 974.9011
+  },
+  "Afghanistan": {
+    "team": "Afghanistan",
+    "code": "AFG",
+    "rank": 169,
+    "points": 971.202635,
+    "prevPoints": 972.745782
+  },
+  "South Sudan": {
+    "team": "South Sudan",
+    "code": "SSD",
+    "rank": 170,
+    "points": 970.944527,
+    "prevPoints": 970.944527
+  },
+  "St Vincent and the Grenadines": {
+    "team": "St Vincent and the Grenadines",
+    "code": "VIN",
+    "rank": 171,
+    "points": 968.269638,
+    "prevPoints": 968.269638
+  },
+  "Andorra": {
+    "team": "Andorra",
+    "code": "AND",
+    "rank": 172,
+    "points": 946.429826,
+    "prevPoints": 945.341934
+  },
+  "Maldives": {
+    "team": "Maldives",
+    "code": "MDV",
+    "rank": 173,
+    "points": 943.917901,
+    "prevPoints": 954.928349
+  },
+  "Chinese Taipei": {
+    "team": "Chinese Taipei",
+    "code": "TPE",
+    "rank": 174,
+    "points": 923.782643,
+    "prevPoints": 923.782643
+  },
+  "Montserrat": {
+    "team": "Montserrat",
+    "code": "MSR",
+    "rank": 175,
+    "points": 916.75251,
+    "prevPoints": 916.75251
+  },
+  "Cambodia": {
+    "team": "Cambodia",
+    "code": "CAM",
+    "rank": 176,
+    "points": 916.241304,
+    "prevPoints": 911.538277
+  },
+  "Nepal": {
+    "team": "Nepal",
+    "code": "NEP",
+    "rank": 177,
+    "points": 914.541224,
+    "prevPoints": 914.541224
+  },
+  "Mauritius": {
+    "team": "Mauritius",
+    "code": "MRI",
+    "rank": 178,
+    "points": 911.487501,
+    "prevPoints": 911.487501
+  },
+  "Barbados": {
+    "team": "Barbados",
+    "code": "BRB",
+    "rank": 179,
+    "points": 909.893208,
+    "prevPoints": 909.893208
+  },
+  "Belize": {
+    "team": "Belize",
+    "code": "BLZ",
+    "rank": 180,
+    "points": 907.001211,
+    "prevPoints": 907.001211
+  },
+  "Bangladesh": {
+    "team": "Bangladesh",
+    "code": "BAN",
+    "rank": 181,
+    "points": 902.92965,
+    "prevPoints": 899.532777
+  },
+  "Dominica": {
+    "team": "Dominica",
+    "code": "DMA",
+    "rank": 182,
+    "points": 897.686437,
+    "prevPoints": 897.686437
+  },
+  "Chad": {
+    "team": "Chad",
+    "code": "CHA",
+    "rank": 183,
+    "points": 896.852819,
+    "prevPoints": 896.852819
+  },
+  "Eritrea": {
+    "team": "Eritrea",
+    "code": "ERI",
+    "rank": 184,
+    "points": 887.063341,
+    "prevPoints": 887.063341
+  },
+  "Laos": {
+    "team": "Laos",
+    "code": "LAO",
+    "rank": 185,
+    "points": 885.028891,
+    "prevPoints": 885.028891
+  },
+  "Cook Islands": {
+    "team": "Cook Islands",
+    "code": "COK",
+    "rank": 186,
+    "points": 877.534995,
+    "prevPoints": 877.534995
+  },
+  "Samoa": {
+    "team": "Samoa",
+    "code": "SAM",
+    "rank": 187,
+    "points": 876.407812,
+    "prevPoints": 876.407812
+  },
+  "Bhutan": {
+    "team": "Bhutan",
+    "code": "BHU",
+    "rank": 188,
+    "points": 875.845061,
+    "prevPoints": 880.548088
+  },
+  "Aruba": {
+    "team": "Aruba",
+    "code": "ARU",
+    "rank": 189,
+    "points": 875.61115,
+    "prevPoints": 877.297071
+  },
+  "Mongolia": {
+    "team": "Mongolia",
+    "code": "MNG",
+    "rank": 190,
+    "points": 874.469074,
+    "prevPoints": 879.751523
+  },
+  "Sri Lanka": {
+    "team": "Sri Lanka",
+    "code": "SRI",
+    "rank": 191,
+    "points": 871.820215,
+    "prevPoints": 871.820215
+  },
+  "American Samoa": {
+    "team": "American Samoa",
+    "code": "ASA",
+    "rank": 192,
+    "points": 871.612081,
+    "prevPoints": 871.612081
+  },
+  "Brunei Darussalam": {
+    "team": "Brunei Darussalam",
+    "code": "BRU",
+    "rank": 193,
+    "points": 863.09176,
+    "prevPoints": 863.09176
+  },
+  "Macau": {
+    "team": "Macau",
+    "code": "MAC",
+    "rank": 194,
+    "points": 858.03342,
+    "prevPoints": 858.03342
+  },
+  "São Tomé and Príncipe": {
+    "team": "São Tomé and Príncipe",
+    "code": "STP",
+    "rank": 195,
+    "points": 855.438666,
+    "prevPoints": 855.438666
+  },
+  "Djibouti": {
+    "team": "Djibouti",
+    "code": "DJI",
+    "rank": 196,
+    "points": 853.581786,
+    "prevPoints": 853.581786
+  },
+  "Cayman Islands": {
+    "team": "Cayman Islands",
+    "code": "CAY",
+    "rank": 197,
+    "points": 850.061011,
+    "prevPoints": 855.449528
+  },
+  "Somalia": {
+    "team": "Somalia",
+    "code": "SOM",
+    "rank": 198,
+    "points": 839.169697,
+    "prevPoints": 839.169697
+  },
+  "Pakistan": {
+    "team": "Pakistan",
+    "code": "PAK",
+    "rank": 199,
+    "points": 837.151593,
+    "prevPoints": 824.597998
+  },
+  "Tonga": {
+    "team": "Tonga",
+    "code": "TGA",
+    "rank": 200,
+    "points": 835.64241,
+    "prevPoints": 835.64241
+  },
+  "Timor-Leste": {
+    "team": "Timor-Leste",
+    "code": "TLS",
+    "rank": 201,
+    "points": 825.639984,
+    "prevPoints": 825.639984
+  },
+  "Gibraltar": {
+    "team": "Gibraltar",
+    "code": "GIB",
+    "rank": 202,
+    "points": 820.260818,
+    "prevPoints": 810.14071
+  },
+  "Guam": {
+    "team": "Guam",
+    "code": "GUM",
+    "rank": 203,
+    "points": 819.540575,
+    "prevPoints": 825.430997
+  },
+  "Seychelles": {
+    "team": "Seychelles",
+    "code": "SEY",
+    "rank": 204,
+    "points": 804.161509,
+    "prevPoints": 804.161509
+  },
+  "Turks and Caicos Islands": {
+    "team": "Turks and Caicos Islands",
+    "code": "TCA",
+    "rank": 205,
+    "points": 803.980015,
+    "prevPoints": 803.980015
+  },
+  "Liechtenstein": {
+    "team": "Liechtenstein",
+    "code": "LIE",
+    "rank": 206,
+    "points": 797.701009,
+    "prevPoints": 803.570149
+  },
+  "Bahamas": {
+    "team": "Bahamas",
+    "code": "BAH",
+    "rank": 207,
+    "points": 786.816217,
+    "prevPoints": 786.816217
+  },
+  "US Virgin Islands": {
+    "team": "US Virgin Islands",
+    "code": "VIR",
+    "rank": 208,
+    "points": 779.764266,
+    "prevPoints": 779.764266
+  },
+  "British Virgin Islands": {
+    "team": "British Virgin Islands",
+    "code": "VGB",
+    "rank": 209,
+    "points": 777.405734,
+    "prevPoints": 782.137325
+  },
+  "Anguilla": {
+    "team": "Anguilla",
+    "code": "AIA",
+    "rank": 210,
+    "points": 760.251852,
+    "prevPoints": 760.251852
+  },
+  "San Marino": {
+    "team": "San Marino",
+    "code": "SMR",
+    "rank": 211,
+    "points": 722.933728,
+    "prevPoints": 726.330601
+  }
+}
