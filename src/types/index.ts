@@ -87,8 +87,10 @@ export interface BettingSuggestion {
   type: BetType;
   label: string;
   rationale: string;
-  confidence: number;        // 0–100
-  oddsEstimate: string;
+  confidence: number;        // model probability, 0–100
+  oddsEstimate: string;      // estimated market price, e.g. "~1.85"
+  impliedPct: number;        // probability implied by the market odds, 0–100
+  edge: number;              // model % − implied % (value; +ve = model edge)
 }
 
 // ─── Player projection ────────────────────────────────────────────────────────

@@ -2,20 +2,38 @@ import type { Player, Team, MatchPrediction, BettingSuggestion, PlayerProjection
 
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
 
-// Convert a hit probability into a plausible bookmaker decimal price (with margin).
-const MARGIN = 0.94;
-function toOdds(p: number): string {
-  const o = Math.max(1.04, (1 / clamp(p, 0.02, 0.98)) * MARGIN);
-  return `~${o.toFixed(2)}`;
+// Deterministic 0..1 from a string seed (stable per pick).
+function seeded(seed: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return ((h >>> 0) % 100000) / 100000;
 }
 
+/**
+ * Build a suggestion with a value indicator. The market price is the model's
+ * fair odds nudged by a small, seeded "market mispricing" — so some picks beat
+ * the market (positive edge = value) and some don't, mirroring real betting.
+ * edge = model probability − probability implied by the offered odds.
+ */
 function mk(type: BetType, label: string, prob: number, rationale: string): BettingSuggestion {
+  const p = clamp(prob, 0.02, 0.97);
+  // mispricing in [-0.05, +0.11]: positive → market underrates → value for us
+  const mispricing = seeded(`${type}:${label}`) * 0.16 - 0.05;
+  const impliedP = clamp(p * (1 - mispricing), 0.02, 0.98);
+  const odds = Math.max(1.04, 1 / impliedP);
+  const edge = Math.round((p - impliedP) * 1000) / 10; // percentage points, 1dp
+
   return {
     type,
     label,
-    confidence: Math.round(clamp(prob, 0.02, 0.98) * 100),
-    oddsEstimate: toOdds(prob),
     rationale,
+    confidence: Math.round(p * 100),
+    oddsEstimate: `~${odds.toFixed(2)}`,
+    impliedPct: Math.round(impliedP * 100),
+    edge,
   };
 }
 
@@ -75,33 +93,29 @@ export function generateBettingSuggestions(
   const totalXG = prediction.xGHome + prediction.xGAway;
   const favHome = prediction.homeWin >= prediction.awayWin;
   const fav = favHome ? home : away;
-  const dog = favHome ? away : home;
   const favWin = favHome ? prediction.homeWin : prediction.awayWin;
   const favBy2 = favHome ? m.homeBy2 : m.awayBy2;
 
   return [
-    outcomePick(fav, dog, favWin, prediction.draw, favBy2),
+    outcomePick(fav, favWin, prediction.draw, favBy2),
     goalsPick(home, away, m, totalXG, prediction),
     playerPick(homePlayers, awayPlayers, prediction),
   ];
 }
 
+// The straight 1X2 result already lives on the Match Odds board, so this pick
+// uses a *different* market (handicap or double chance) to avoid showing the
+// same bet at two prices.
 function outcomePick(
-  fav: Team, dog: Team, favWin: number, draw: number, favBy2: number
+  fav: Team, favWin: number, draw: number, favBy2: number
 ): BettingSuggestion {
-  const favP = favWin / 100;
-
-  if (favWin >= 66 && favBy2 >= 0.42) {
+  if (favWin >= 58 && favBy2 >= 0.30) {
     return mk('asian-handicap', `${fav.name} -1.5`, favBy2,
-      `${fav.name} are heavy favourites (${favWin}% to win). The model gives a ${(favBy2 * 100).toFixed(0)}% chance of a 2+ goal winning margin.`);
+      `${fav.name} are strong favourites (${favWin}% to win). The model gives a ${(favBy2 * 100).toFixed(0)}% chance of a 2+ goal winning margin — better value than the short outright price.`);
   }
-  if (favWin >= 52) {
-    return mk('match-result', `${fav.name} to Win`, favP,
-      `${fav.name} (#${fav.rank}) are favoured over ${dog.name} (#${dog.rank}) — ${favWin}% model win probability.`);
-  }
-  const dc = clamp((favWin + draw) / 100, 0.3, 0.92);
+  const dc = clamp((favWin + draw) / 100, 0.3, 0.93);
   return mk('double-chance', `${fav.name} or Draw`, dc,
-    `Tight matchup — ${fav.name} only ${favWin}% to win outright, but ${(dc * 100).toFixed(0)}% to avoid defeat (double chance).`);
+    `${fav.name} are favoured but it's not a lock — ${(dc * 100).toFixed(0)}% to avoid defeat (double chance covers a win or a draw).`);
 }
 
 function goalsPick(

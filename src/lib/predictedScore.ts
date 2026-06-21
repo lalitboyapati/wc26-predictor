@@ -3,32 +3,22 @@ import { getTeam } from './dataHelpers';
 import { predictMatch } from './predictor';
 
 /**
- * A single deterministic *predicted* scoreline per match, derived from each
- * side's expected goals (seeded Poisson draw). This is a model prediction —
- * the World Cup hasn't been played — and is the shared source of truth for the
- * predicted group tables and bracket so every view agrees.
+ * The single predicted scoreline for a match.
+ *
+ * It is the *most likely exact scoreline that matches the model's most likely
+ * outcome* (home win / draw / away win). Deriving it from the same prediction
+ * guarantees the score can never contradict the win-probability bar or the
+ * "team to win" betting pick (e.g. it will never show the 65% favourite losing).
+ * Used everywhere — schedule cards, match detail, group standings.
  */
-
-function seededRandom(seed: string, salt = 0): number {
-  let h = 2166136261 ^ salt;
-  for (let i = 0; i < seed.length; i++) {
-    h ^= seed.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return ((h >>> 0) % 100000) / 100000;
-}
-
-/** Seeded Poisson sample (inverse-CDF) — realistic football scorelines from xG. */
-function poissonSample(lambda: number, u: number): number {
+function poissonPmf(lambda: number, max = 8): number[] {
+  const out: number[] = [];
   let p = Math.exp(-lambda);
-  let cum = p;
-  let k = 0;
-  while (u > cum && k < 8) {
-    k++;
-    p *= lambda / k;
-    cum += p;
+  for (let k = 0; k <= max; k++) {
+    out[k] = p;
+    p *= lambda / (k + 1);
   }
-  return k;
+  return out;
 }
 
 export function getPredictedScore(match: Match): { homeGoals: number; awayGoals: number } {
@@ -37,8 +27,26 @@ export function getPredictedScore(match: Match): { homeGoals: number; awayGoals:
   if (!home || !away) return { homeGoals: 0, awayGoals: 0 };
 
   const pred = predictMatch(home, away);
-  return {
-    homeGoals: poissonSample(pred.xGHome, seededRandom(match.id, 1)),
-    awayGoals: poissonSample(pred.xGAway, seededRandom(match.id, 2)),
-  };
+  const ph = poissonPmf(pred.xGHome);
+  const pa = poissonPmf(pred.xGAway);
+
+  // Most likely outcome from the model.
+  const outcome =
+    pred.homeWin >= pred.draw && pred.homeWin >= pred.awayWin ? 'home' :
+    pred.awayWin >= pred.draw && pred.awayWin >= pred.homeWin ? 'away' : 'draw';
+
+  // Highest-probability scoreline consistent with that outcome.
+  let best = { h: outcome === 'away' ? 0 : 1, a: outcome === 'home' ? 0 : 1, p: -1 };
+  for (let h = 0; h < ph.length; h++) {
+    for (let a = 0; a < pa.length; a++) {
+      const matches =
+        outcome === 'home' ? h > a :
+        outcome === 'away' ? a > h : h === a;
+      if (!matches) continue;
+      const p = ph[h] * pa[a];
+      if (p > best.p) best = { h, a, p };
+    }
+  }
+
+  return { homeGoals: best.h, awayGoals: best.a };
 }

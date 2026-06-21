@@ -7,9 +7,11 @@ interface Props {
   liveOdds?: PolymarketOdds;
 }
 
+// Fair model odds — the implied probability of these equals the % shown,
+// so the odds and percentages on this board never disagree.
 function impliedOdds(pct: number): string {
   if (pct <= 0) return '–';
-  return ((1 / (pct / 100)) * 0.94).toFixed(2);
+  return (1 / (pct / 100)).toFixed(2);
 }
 
 export default function WinProbabilityBar({ prediction, homeTeam, awayTeam, liveOdds }: Props) {
