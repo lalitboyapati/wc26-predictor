@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import UpcomingPage from './pages/UpcomingPage';
 import SchedulePage from './pages/SchedulePage';
 
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/bracket" element={<BracketPage />} />
         </Routes>
       </Suspense>
+      <SpeedInsights />
     </BrowserRouter>
   );
 }
