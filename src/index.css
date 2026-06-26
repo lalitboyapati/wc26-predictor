@@ -33,11 +33,17 @@ body {
   fill: none;
 }
 
-/* Scrollbars */
+/* Scrollbars — WebKit */
 ::-webkit-scrollbar { width: 9px; height: 9px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 9px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+/* Scrollbars — Firefox */
+* { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.12) transparent; }
+
+/* Utility: hide scrollbar while keeping scroll */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
 /* Player detail slide-up */
 .player-panel-enter { animation: slideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1); }

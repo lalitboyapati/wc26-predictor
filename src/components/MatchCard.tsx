@@ -59,9 +59,9 @@ export default function MatchCard({ match, homeTeam, awayTeam, onClick }: Props)
       {pred && (
         <div className="mt-3.5">
           <div className="flex h-1.5 w-full overflow-hidden rounded-full gap-0.5">
-            <div className="bg-sky-400 rounded-l-full" style={{ width: `${pred.homeWin}%` }} />
-            <div className="bg-zinc-600" style={{ width: `${pred.draw}%` }} />
-            <div className="bg-rose-400 rounded-r-full" style={{ width: `${pred.awayWin}%` }} />
+            <div className="bg-home rounded-l-full" style={{ width: `${pred.homeWin}%` }} />
+            <div className="bg-draw" style={{ width: `${pred.draw}%` }} />
+            <div className="bg-away rounded-r-full" style={{ width: `${pred.awayWin}%` }} />
           </div>
           <div className="flex items-center justify-between mt-1.5 text-[11px] text-gray-400">
             <span className="text-sky-300/90">{pred.homeWin}%</span>

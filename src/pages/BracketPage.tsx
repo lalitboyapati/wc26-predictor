@@ -15,7 +15,7 @@ export default function BracketPage() {
   return (
     <div className="min-h-screen text-gray-100">
       <TopNav />
-      <main className="max-w-6xl mx-auto px-4 sm:px-5 py-7">
+      <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-5 py-7">
         <div className="mb-6">
           <h1 className="text-2xl font-extrabold tracking-tight text-white">Knockout Bracket</h1>
           <p className="text-sm text-gray-400 mt-1 max-w-2xl">
@@ -28,7 +28,7 @@ export default function BracketPage() {
           <Bracket rounds={rounds} />
         </div>
 
-        <p className="text-xs text-gray-600 mt-4">
+        <p className="text-xs text-gray-500 mt-4">
           Gold rows are projected winners · qualifiers pulled from the predicted group standings.
         </p>
       </main>

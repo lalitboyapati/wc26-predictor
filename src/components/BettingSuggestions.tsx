@@ -69,14 +69,14 @@ export default function BettingSuggestions({ suggestions }: { suggestions: Betti
             </div>
             <div className="flex-shrink-0 text-right">
               <div className="text-base font-extrabold text-gold tabular-nums leading-none">{s.oddsEstimate}</div>
-              <div className="text-[10px] text-gray-600 mt-0.5 tabular-nums">{s.impliedPct}% implied</div>
+              <div className="text-[10px] text-gray-500 mt-0.5 tabular-nums">{s.impliedPct}% implied</div>
               <div className="mt-1.5"><ValueChip edge={s.edge} /></div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="px-4 py-2.5 border-t border-white/[0.06] text-[10.5px] text-gray-600 leading-snug">
+      <div className="px-4 py-2.5 border-t border-white/[0.06] text-[10.5px] text-gray-500 leading-snug">
         <span className="text-emerald-300/80 font-semibold">Value</span> = model probability minus the odds-implied
         probability. Positive means the model rates the bet higher than the price suggests.
       </div>

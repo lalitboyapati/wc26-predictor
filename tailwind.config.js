@@ -15,6 +15,9 @@ export default {
           DEFAULT: '#fbbf24', // amber-400
           dim: '#d97706',
         },
+        home: { DEFAULT: '#38bdf8' },  // sky-400 — home team bars
+        away: { DEFAULT: '#fb7185' },  // rose-400 — away team bars
+        draw: { DEFAULT: '#52525b' },  // zinc-600 — draw bars
         ink: {
           900: '#0c0e13',
           800: '#11141b',

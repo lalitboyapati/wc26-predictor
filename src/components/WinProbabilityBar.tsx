@@ -47,9 +47,9 @@ export default function WinProbabilityBar({ prediction, homeTeam, awayTeam, live
       </div>
 
       <div className="flex h-2 w-full overflow-hidden rounded-full gap-0.5">
-        <div className="bg-sky-400 rounded-l-full" style={{ width: `${home}%` }} />
-        <div className="bg-zinc-600" style={{ width: `${draw}%` }} />
-        <div className="bg-rose-400 rounded-r-full" style={{ width: `${away}%` }} />
+        <div className="bg-home rounded-l-full" style={{ width: `${home}%` }} />
+        <div className="bg-draw" style={{ width: `${draw}%` }} />
+        <div className="bg-away rounded-r-full" style={{ width: `${away}%` }} />
       </div>
 
       <div className="flex justify-between items-center text-[12px] text-gray-400 mt-3">

@@ -28,14 +28,14 @@ function StatCompare({
       <div className="flex items-center gap-3 ml-auto">
         <div className="text-center">
           <div className="text-gray-300 font-mono font-semibold text-sm">{actual.toFixed(actual % 1 === 0 ? 0 : 2)}{unit}</div>
-          <div className="text-gray-600 text-[10px]">Actual</div>
+          <div className="text-gray-500 text-[10px]">Actual</div>
         </div>
         <div className="text-gray-700 text-xs">→</div>
         <div className="text-center">
           <div className={`tabular-nums font-semibold text-sm ${better ? 'text-gold' : 'text-gray-300'}`}>
             {projected.toFixed(projected % 1 === 0 ? 0 : 2)}{unit}
           </div>
-          <div className="text-gray-600 text-[10px]">Projected</div>
+          <div className="text-gray-500 text-[10px]">Projected</div>
         </div>
       </div>
     </div>
@@ -121,7 +121,7 @@ export default function PlayerDetailPanel({ player, projection, onClose }: Props
           <button
             onClick={onClose}
             aria-label="Close player details"
-            className="text-gray-500 hover:text-gray-300 transition-colors p-1 -mr-1 mt-0.5"
+            className="text-gray-500 hover:text-gray-300 transition-colors p-2.5 -mr-2 mt-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-1 focus-visible:ring-offset-ink-800 rounded-lg"
           >
             <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -132,7 +132,7 @@ export default function PlayerDetailPanel({ player, projection, onClose }: Props
         <div className="px-5 py-4 space-y-6">
 
           {/* Form score */}
-          <div className="flex items-center gap-4 p-3 rounded-lg bg-gray-800 border border-gray-700">
+          <div className="flex items-center gap-4 p-3 rounded-lg bg-ink-800 border border-white/[0.08]">
             <div className="text-center">
               <div className="text-2xl font-bold text-white">{player.formScore.toFixed(1)}</div>
               <div className="text-xs text-gray-400">Form /10</div>
@@ -157,7 +157,7 @@ export default function PlayerDetailPanel({ player, projection, onClose }: Props
           {/* Stats comparison */}
           <div>
             <h3 className="text-sm font-semibold text-white mb-3">Actual vs Projected</h3>
-            <div className="bg-gray-800/60 rounded-lg px-4 border border-gray-700">
+            <div className="bg-ink-800/60 rounded-lg px-4 border border-white/[0.08]">
               {player.position === 'GK' ? (
                 <>
                   <StatCompare label="Saves" actual={player.gkSaves} projected={Math.round(player.gkSaves / Math.max(player.games, 1) * 1.1)} />
@@ -194,7 +194,7 @@ export default function PlayerDetailPanel({ player, projection, onClose }: Props
 
           {/* Per-90 stats */}
           {player.position !== 'GK' && player.minutes > 0 && (
-            <div className="p-3 rounded-lg bg-gray-800/40 border border-gray-700/50">
+            <div className="p-3 rounded-lg bg-ink-700/40 border border-white/[0.06]">
               <h4 className="text-xs font-semibold text-gray-400 mb-2">Per 90</h4>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div>

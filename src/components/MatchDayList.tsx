@@ -30,7 +30,7 @@ export default function MatchDayList({ matches }: { matches: Match[] }) {
                 <span className="text-[11px] font-semibold text-gold bg-gold/10 rounded-full px-2 py-0.5">Live day</span>
               )}
               <div className="flex-1 h-px bg-white/[0.06]" />
-              <span className="text-xs text-gray-600">{byDate[date].length} matches</span>
+              <span className="text-xs text-gray-500">{byDate[date].length} matches</span>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {byDate[date].map(match => (

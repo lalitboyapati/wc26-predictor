@@ -14,14 +14,14 @@ export default function GroupStandings({ group }: { group: Group }) {
       <table className="w-full text-[13px] tabular-nums">
         <thead>
           <tr className="text-gray-400 text-[11px]">
-            <th className="text-left font-medium px-4 pt-2.5 pb-1 w-5">#</th>
-            <th className="text-left font-medium pt-2.5 pb-1">Team</th>
-            <th className="text-center font-medium px-1 w-6">P</th>
-            <th className="text-center font-medium px-1 w-6">W</th>
-            <th className="text-center font-medium px-1 w-6">D</th>
-            <th className="text-center font-medium px-1 w-6">L</th>
-            <th className="text-center font-medium px-1 w-8">GD</th>
-            <th className="text-center font-medium px-3 w-9">Pts</th>
+            <th scope="col" className="text-left font-medium px-4 pt-2.5 pb-1 w-5">#</th>
+            <th scope="col" className="text-left font-medium pt-2.5 pb-1">Team</th>
+            <th scope="col" className="text-center font-medium px-1 w-6">P</th>
+            <th scope="col" className="text-center font-medium px-1 w-6">W</th>
+            <th scope="col" className="text-center font-medium px-1 w-6">D</th>
+            <th scope="col" className="text-center font-medium px-1 w-6">L</th>
+            <th scope="col" className="text-center font-medium px-1 w-8">GD</th>
+            <th scope="col" className="text-center font-medium px-3 w-9">Pts</th>
           </tr>
         </thead>
         <tbody>

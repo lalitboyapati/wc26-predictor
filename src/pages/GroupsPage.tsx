@@ -13,7 +13,7 @@ export default function GroupsPage() {
   return (
     <div className="min-h-screen text-gray-100">
       <TopNav />
-      <main className="max-w-6xl mx-auto px-4 sm:px-5 py-7">
+      <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-5 py-7">
         <div className="mb-6 flex items-start justify-between gap-4 flex-wrap">
           <div>
             <h1 className="text-2xl font-extrabold tracking-tight text-white">Group Standings</h1>

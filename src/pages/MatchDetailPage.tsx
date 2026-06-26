@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { getMatch, getTeam, getLineup, formatMatchTimeET, formatMatchDate } from '../lib/dataHelpers';
 import { predictMatch } from '../lib/predictor';
 import { generateBettingSuggestions, projectPlayerStats } from '../lib/bettingEngine';
@@ -35,10 +35,10 @@ function BarCompare({
       </div>
       <div className="flex gap-0.5 h-2">
         <div className="flex-1 flex justify-end rounded-l-full overflow-hidden bg-white/[0.05]">
-          <div className="bg-sky-400/80 h-full rounded-l-full" style={{ width: `${homeWidth}%` }} />
+          <div className="bg-home/80 h-full rounded-l-full" style={{ width: `${homeWidth}%` }} />
         </div>
         <div className="flex-1 flex justify-start rounded-r-full overflow-hidden bg-white/[0.05]">
-          <div className="bg-rose-400/80 h-full rounded-r-full" style={{ width: `${awayWidth}%` }} />
+          <div className="bg-away/80 h-full rounded-r-full" style={{ width: `${awayWidth}%` }} />
         </div>
       </div>
     </div>
@@ -72,6 +72,13 @@ export default function MatchDetailPage() {
 
   const predictedScore = useMemo(() => match ? getPredictedScore(match) : null, [match]);
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
+
+  const handlePlayerClick = (player: Player) => {
+    lastFocusedRef.current = document.activeElement as HTMLElement;
+    setSelectedPlayer(player);
+  };
+
   const [liveOdds, setLiveOdds] = useState<PolymarketOdds | null>(null);
   const [loadingOdds, setLoadingOdds] = useState(false);
 
@@ -90,6 +97,13 @@ export default function MatchDetailPage() {
       setLoadingOdds(false);
     });
   }, [match]);
+
+  useEffect(() => {
+    if (!selectedPlayer && lastFocusedRef.current) {
+      lastFocusedRef.current.focus();
+      lastFocusedRef.current = null;
+    }
+  }, [selectedPlayer]);
 
   if (!match) {
     return (
@@ -111,15 +125,15 @@ export default function MatchDetailPage() {
       {/* Breadcrumb */}
       <div className="border-b border-white/[0.06] bg-ink-900/40">
         <div className="max-w-6xl mx-auto px-4 sm:px-5 py-2.5 flex items-center gap-2.5 text-[12px] text-gray-400">
-          <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-gold transition-colors font-medium">← Back</button>
-          <span className="text-gray-700">·</span>
+          <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-gold transition-colors font-medium py-2 -my-2">← Back</button>
+          <span className="text-gray-500">·</span>
           <span>{formatMatchDate(match.date)}</span>
-          <span className="text-gray-700">·</span>
+          <span className="text-gray-500">·</span>
           <span>{match.round}</span>
         </div>
       </div>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-5 py-6 space-y-4">
+      <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-5 py-6 space-y-4">
 
         {/* ── Hero Zone ── */}
         <div className="relative overflow-hidden rounded-2xl border border-white/[0.08]">
@@ -160,13 +174,13 @@ export default function MatchDetailPage() {
             {prediction && (
               <div>
                 <div className="flex h-3.5 w-full overflow-hidden rounded-full gap-px">
-                  <div className="bg-sky-400 rounded-l-full" style={{ width: `${prediction.homeWin}%` }} />
-                  <div className="bg-zinc-600" style={{ width: `${prediction.draw}%` }} />
-                  <div className="bg-rose-400 rounded-r-full" style={{ width: `${prediction.awayWin}%` }} />
+                  <div className="bg-home rounded-l-full" style={{ width: `${prediction.homeWin}%` }} />
+                  <div className="bg-draw" style={{ width: `${prediction.draw}%` }} />
+                  <div className="bg-away rounded-r-full" style={{ width: `${prediction.awayWin}%` }} />
                 </div>
                 <div className="flex justify-between mt-1.5 text-[10px] tabular-nums font-medium">
                   <span className="text-sky-300">{prediction.homeWin}%</span>
-                  <span className="text-gray-500">{prediction.draw}%</span>
+                  <span className="text-gray-400">{prediction.draw}%</span>
                   <span className="text-rose-300">{prediction.awayWin}%</span>
                 </div>
               </div>
@@ -207,13 +221,13 @@ export default function MatchDetailPage() {
               {prediction && (
                 <div className="w-44 md:w-52">
                   <div className="flex h-4 w-full overflow-hidden rounded-full gap-px">
-                    <div className="bg-sky-400 rounded-l-full" style={{ width: `${prediction.homeWin}%` }} />
-                    <div className="bg-zinc-600" style={{ width: `${prediction.draw}%` }} />
-                    <div className="bg-rose-400 rounded-r-full" style={{ width: `${prediction.awayWin}%` }} />
+                    <div className="bg-home rounded-l-full" style={{ width: `${prediction.homeWin}%` }} />
+                    <div className="bg-draw" style={{ width: `${prediction.draw}%` }} />
+                    <div className="bg-away rounded-r-full" style={{ width: `${prediction.awayWin}%` }} />
                   </div>
                   <div className="flex justify-between mt-1.5 text-[10px] tabular-nums font-medium">
                     <span className="text-sky-300">{prediction.homeWin}%</span>
-                    <span className="text-gray-500">{prediction.draw}%</span>
+                    <span className="text-gray-400">{prediction.draw}%</span>
                     <span className="text-rose-300">{prediction.awayWin}%</span>
                   </div>
                 </div>
@@ -248,7 +262,7 @@ export default function MatchDetailPage() {
               awayPlayers={awayPlayers}
               homeTeam={match.homeTeam}
               awayTeam={match.awayTeam}
-              onPlayerClick={setSelectedPlayer}
+              onPlayerClick={handlePlayerClick}
               selectedPlayerId={selectedPlayer?.id}
             />
           ) : (
