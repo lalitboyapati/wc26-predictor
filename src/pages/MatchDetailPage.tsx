@@ -110,7 +110,7 @@ export default function MatchDetailPage() {
 
       {/* Breadcrumb */}
       <div className="border-b border-white/[0.06] bg-ink-900/40">
-        <div className="max-w-5xl mx-auto px-4 sm:px-5 py-2.5 flex items-center gap-2.5 text-[12px] text-gray-400">
+        <div className="max-w-6xl mx-auto px-4 sm:px-5 py-2.5 flex items-center gap-2.5 text-[12px] text-gray-400">
           <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-gold transition-colors font-medium">← Back</button>
           <span className="text-gray-700">·</span>
           <span>{formatMatchDate(match.date)}</span>
@@ -119,7 +119,7 @@ export default function MatchDetailPage() {
         </div>
       </div>
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-5 py-6 space-y-4">
+      <main className="max-w-6xl mx-auto px-4 sm:px-5 py-6 space-y-4">
 
         {/* ── Hero Zone ── */}
         <div className="relative overflow-hidden rounded-2xl border border-white/[0.08]">
@@ -236,45 +236,42 @@ export default function MatchDetailPage() {
           </div>
         </div>
 
-        {/* ── Analysis section: pitch + sticky panel ── */}
-        <div className="grid lg:grid-cols-[3fr_2fr] gap-4 items-start">
-          {/* Pitch */}
-          <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] p-4 sm:p-5">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-bold text-white">Starting XI <span className="font-normal text-gray-400">— tap a player</span></h3>
-              <span className="text-xs text-gray-600">4-3-3</span>
-            </div>
-            {allMatchPlayers.length > 0 ? (
-              <SoccerPitch
-                homePlayers={homePlayers}
-                awayPlayers={awayPlayers}
+        {/* ── Pitch (full width) ── */}
+        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] p-4 sm:p-5">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-bold text-white">Starting XI <span className="font-normal text-gray-400">— tap a player</span></h3>
+            <span className="text-xs text-gray-600">4-3-3</span>
+          </div>
+          {allMatchPlayers.length > 0 ? (
+            <SoccerPitch
+              homePlayers={homePlayers}
+              awayPlayers={awayPlayers}
+              homeTeam={match.homeTeam}
+              awayTeam={match.awayTeam}
+              onPlayerClick={setSelectedPlayer}
+              selectedPlayerId={selectedPlayer?.id}
+            />
+          ) : (
+            <div className="text-center py-10 text-gray-400 text-sm">Lineups announced closer to kickoff.</div>
+          )}
+        </div>
+
+        {/* ── Odds + Betting Picks (side by side) ── */}
+        <div className="grid lg:grid-cols-2 gap-4">
+          {prediction && (
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] p-5">
+              <WinProbabilityBar
+                prediction={prediction}
                 homeTeam={match.homeTeam}
                 awayTeam={match.awayTeam}
-                onPlayerClick={setSelectedPlayer}
-                selectedPlayerId={selectedPlayer?.id}
+                liveOdds={liveOdds ?? undefined}
               />
-            ) : (
-              <div className="text-center py-10 text-gray-400 text-sm">Lineups announced closer to kickoff.</div>
-            )}
-          </div>
-
-          {/* Sticky analysis panel */}
-          <div className="space-y-4 lg:sticky lg:top-[80px]">
-            {prediction && (
-              <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] p-5">
-                <WinProbabilityBar
-                  prediction={prediction}
-                  homeTeam={match.homeTeam}
-                  awayTeam={match.awayTeam}
-                  liveOdds={liveOdds ?? undefined}
-                />
-                {loadingOdds && <div className="mt-2 h-1 w-20 rounded-full bg-white/10 animate-pulse" />}
-              </div>
-            )}
-            {bettingSuggestions.length > 0 && (
-              <BettingSuggestions suggestions={bettingSuggestions} />
-            )}
-          </div>
+              {loadingOdds && <div className="mt-2 h-1 w-20 rounded-full bg-white/10 animate-pulse" />}
+            </div>
+          )}
+          {bettingSuggestions.length > 0 && (
+            <BettingSuggestions suggestions={bettingSuggestions} />
+          )}
         </div>
 
         {/* ── Head-to-Head comparison ── */}
