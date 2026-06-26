@@ -37,7 +37,7 @@ export default function WinProbabilityBar({ prediction, homeTeam, awayTeam, live
 
       <div className="grid grid-cols-3 gap-2.5 mb-3.5">
         {cols.map((c, i) => (
-          <div key={i} className="rounded-xl border border-white/[0.07] bg-white/[0.02] px-2 py-3 text-center">
+          <div key={i} className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-2 py-3 text-center">
             <div className={`text-[12px] font-medium truncate ${c.accent}`}>{c.label}</div>
             <div className="text-xl font-extrabold text-white tabular-nums leading-tight mt-1">{impliedOdds(c.pct)}</div>
             <div className="text-[11px] text-gray-500 tabular-nums">{c.pct}%</div>

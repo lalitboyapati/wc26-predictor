@@ -16,7 +16,7 @@ export default function TopNav() {
       <div className="max-w-6xl mx-auto px-4 sm:px-5 h-16 flex items-center justify-between gap-4">
         {/* Brand */}
         <Link to="/" className="flex items-center gap-2.5 shrink-0">
-          <span className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-gold to-amber-600 text-ink-900 text-lg shadow-lg shadow-amber-900/30">
+          <span className="grid place-items-center w-9 h-9 rounded-xl bg-gold text-ink-900 text-lg">
             ⚽
           </span>
           <div className="leading-tight">

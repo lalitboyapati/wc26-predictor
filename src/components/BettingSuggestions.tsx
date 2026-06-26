@@ -48,7 +48,7 @@ function ValueChip({ edge }: { edge: number }) {
 
 export default function BettingSuggestions({ suggestions }: { suggestions: BettingSuggestion[] }) {
   return (
-    <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] overflow-hidden">
+    <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] overflow-hidden">
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06]">
         <h3 className="text-sm font-bold text-white">Top Betting Picks</h3>
         <span className="text-[11px] text-gray-500">model % · odds · value</span>

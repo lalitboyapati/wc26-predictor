@@ -22,7 +22,7 @@ function TeamRow({ team, goals, isWinner, divider }: {
 
 function MatchBox({ match }: { match: BracketMatch }) {
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-white/[0.025] w-44 overflow-hidden hover:border-white/15 transition-colors">
+    <div className="rounded-xl border border-white/[0.06] bg-white/[0.014] w-44 overflow-hidden hover:border-white/15 transition-colors">
       <TeamRow team={match.home} goals={match.homeGoals} isWinner={match.winner === 'home'} divider />
       <TeamRow team={match.away} goals={match.awayGoals} isWinner={match.winner === 'away'} divider={false} />
     </div>

@@ -26,14 +26,15 @@ export default function MatchCard({ match, homeTeam, awayTeam, onClick }: Props)
   return (
     <button
       onClick={onClick}
-      className="group w-full text-left rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4
-        transition-all duration-200 hover:bg-white/[0.05] hover:border-white/15 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/30"
+      className="group w-full text-left rounded-xl border border-white/[0.06] bg-white/[0.012] p-4
+        transition-colors duration-150 hover:bg-white/[0.035] hover:border-white/[0.12]"
     >
       {/* meta */}
       <div className="flex items-center justify-between mb-3">
         <span className="text-xs text-gray-500">{formatMatchTimeET(match)}</span>
         {fav && (
-          <span className="text-[11px] font-medium text-gold/90 bg-gold/10 rounded-full px-2 py-0.5">
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-gray-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold" />
             {fav.name} {fav.pct}%
           </span>
         )}

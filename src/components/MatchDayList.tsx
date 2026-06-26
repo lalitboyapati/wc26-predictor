@@ -11,7 +11,7 @@ export default function MatchDayList({ matches }: { matches: Match[] }) {
 
   if (dates.length === 0) {
     return (
-      <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-10 text-center text-gray-500">
+      <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-10 text-center text-gray-500">
         No matches to show.
       </div>
     );

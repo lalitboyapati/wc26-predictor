@@ -4,7 +4,7 @@ import Flag from './Flag';
 /** A single group's standings table. Top 2 = sky accent, 3rd = gold. */
 export default function GroupStandings({ group }: { group: Group }) {
   return (
-    <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] overflow-hidden">
+    <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] overflow-hidden">
       <div className="px-4 py-3 flex items-center justify-between border-b border-white/[0.06]">
         <h3 className="text-sm font-bold text-white">Group {group.label}</h3>
         <span className="text-[11px] text-gray-500">Projected</span>

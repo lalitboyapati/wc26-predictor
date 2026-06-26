@@ -85,7 +85,7 @@ export default function MatchDetailPage() {
       <main className="max-w-5xl mx-auto px-4 sm:px-5 py-6 space-y-4">
 
         {/* Hero */}
-        <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 sm:p-6">
+        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] p-5 sm:p-6">
           <div className="flex items-center justify-between gap-4">
             <div className="flex-1 flex items-center gap-3 min-w-0">
               <Flag code={homeTeam?.flagCode ?? ''} name={match.homeTeam} size={80} className="w-12 h-8 rounded-md" />
@@ -120,7 +120,7 @@ export default function MatchDetailPage() {
         {/* Odds + Betting (bettor focus) */}
         <div className="grid lg:grid-cols-2 gap-4">
           {prediction && (
-            <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] p-5">
               <WinProbabilityBar
                 prediction={prediction}
                 homeTeam={match.homeTeam}
@@ -136,7 +136,7 @@ export default function MatchDetailPage() {
         </div>
 
         {/* Pitch */}
-        <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4 sm:p-5">
+        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] p-4 sm:p-5">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-bold text-white">Starting XI <span className="font-normal text-gray-500">— tap a player</span></h3>
             <span className="text-xs text-gray-600">4-3-3</span>
@@ -157,7 +157,7 @@ export default function MatchDetailPage() {
 
         {/* Team stats */}
         {homeTeam && awayTeam && (
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5">
+          <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] p-5">
             <h3 className="text-sm font-bold text-white mb-4">Team Comparison</h3>
             <div className="space-y-2.5">
               {[

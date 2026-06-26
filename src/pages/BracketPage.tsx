@@ -22,7 +22,7 @@ export default function BracketPage() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5">
+        <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
           <Bracket rounds={rounds} />
         </div>
 
