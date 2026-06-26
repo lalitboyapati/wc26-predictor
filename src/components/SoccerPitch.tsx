@@ -1,4 +1,5 @@
 import type { Player } from '../types';
+import { POS_COLORS } from '../lib/positionColors';
 
 interface Props {
   homePlayers: Player[];
@@ -8,13 +9,6 @@ interface Props {
   onPlayerClick: (player: Player) => void;
   selectedPlayerId?: string;
 }
-
-const POS_COLORS: Record<string, string> = {
-  GK: '#f59e0b', // amber
-  DF: '#38bdf8', // sky
-  MF: '#34d399', // accent green
-  FW: '#fb7185', // rose
-};
 
 function PlayerDot({
   player,
@@ -31,7 +25,7 @@ function PlayerDot({
   return (
     <button
       onClick={onClick}
-      title={`${player.name} (${player.position})`}
+      aria-label={`${player.name} (${player.position})`}
       style={{
         position: 'absolute',
         left: `${player.pitchX}%`,
@@ -39,12 +33,12 @@ function PlayerDot({
         transform: 'translate(-50%, -50%)',
         zIndex: 10,
       }}
-      className="group focus:outline-none"
+      className="group focus:outline-none w-11 h-11 flex items-center justify-center"
     >
-      {/* Pulse ring on selected */}
+      {/* Pulse ring on selected — respects reduced-motion */}
       {isSelected && (
         <span
-          className="absolute inset-0 rounded-full animate-ping"
+          className="absolute inset-0 rounded-full motion-safe:animate-ping"
           style={{ backgroundColor: color, opacity: 0.4 }}
         />
       )}
@@ -92,26 +86,16 @@ export default function SoccerPitch({
           className="absolute inset-0 w-full h-full"
           preserveAspectRatio="none"
         >
-          {/* Outer boundary */}
           <rect x="2" y="2" width="96" height="58" className="pitch-line" />
-          {/* Centre line */}
           <line x1="50" y1="2" x2="50" y2="60" className="pitch-line" />
-          {/* Centre circle */}
           <circle cx="50" cy="31" r="9.15" className="pitch-line" />
           <circle cx="50" cy="31" r="0.5" fill="rgba(255,255,255,0.6)" />
-          {/* Home penalty area (left) */}
           <rect x="2" y="14" width="16.5" height="34" className="pitch-line" />
-          {/* Home goal area (left) */}
           <rect x="2" y="22" width="5.5" height="18" className="pitch-line" />
-          {/* Away penalty area (right) */}
           <rect x="81.5" y="14" width="16.5" height="34" className="pitch-line" />
-          {/* Away goal area (right) */}
           <rect x="92.5" y="22" width="5.5" height="18" className="pitch-line" />
-          {/* Home penalty spot */}
           <circle cx="12" cy="31" r="0.5" fill="rgba(255,255,255,0.6)" />
-          {/* Away penalty spot */}
           <circle cx="88" cy="31" r="0.5" fill="rgba(255,255,255,0.6)" />
-          {/* Goals */}
           <rect x="0" y="26" width="2" height="10" className="pitch-line" />
           <rect x="98" y="26" width="2" height="10" className="pitch-line" />
         </svg>

@@ -30,9 +30,10 @@ export default function WinProbabilityBar({ prediction, homeTeam, awayTeam, live
     <div>
       <div className="flex items-center justify-between mb-3.5">
         <h3 className="text-sm font-bold text-white">Match Odds</h3>
-        <span className={`text-[11px] font-medium rounded-full px-2 py-0.5 ${usingLive ? 'text-emerald-300 bg-emerald-500/10' : 'text-gray-400 bg-white/[0.05]'}`}>
-          {usingLive ? 'Polymarket live' : 'AI model'}
-        </span>
+        {usingLive
+          ? <span className="text-[11px] font-medium rounded-full px-2 py-0.5 text-emerald-300 bg-emerald-500/10">Polymarket live</span>
+          : <span className="text-[11px] font-medium rounded-full px-2 py-0.5 text-gray-300 border border-white/[0.12]">AI model</span>
+        }
       </div>
 
       <div className="grid grid-cols-3 gap-2.5 mb-3.5">
@@ -40,7 +41,7 @@ export default function WinProbabilityBar({ prediction, homeTeam, awayTeam, live
           <div key={i} className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-2 py-3 text-center">
             <div className={`text-[12px] font-medium truncate ${c.accent}`}>{c.label}</div>
             <div className="text-xl font-extrabold text-white tabular-nums leading-tight mt-1">{impliedOdds(c.pct)}</div>
-            <div className="text-[11px] text-gray-500 tabular-nums">{c.pct}%</div>
+            <div className="text-[11px] text-gray-400 tabular-nums">{c.pct}%</div>
           </div>
         ))}
       </div>
@@ -51,9 +52,9 @@ export default function WinProbabilityBar({ prediction, homeTeam, awayTeam, live
         <div className="bg-rose-400 rounded-r-full" style={{ width: `${away}%` }} />
       </div>
 
-      <div className="flex justify-between items-center text-[12px] text-gray-500 mt-3">
+      <div className="flex justify-between items-center text-[12px] text-gray-400 mt-3">
         <span>xG <span className="text-sky-300 font-semibold tabular-nums">{prediction.xGHome}</span></span>
-        <span className="text-gray-500 capitalize">{prediction.confidence} confidence</span>
+        <span className="text-gray-400 capitalize">{prediction.confidence} confidence</span>
         <span>xG <span className="text-rose-300 font-semibold tabular-nums">{prediction.xGAway}</span></span>
       </div>
 

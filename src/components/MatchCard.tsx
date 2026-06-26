@@ -31,7 +31,7 @@ export default function MatchCard({ match, homeTeam, awayTeam, onClick }: Props)
     >
       {/* meta */}
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs text-gray-500">{formatMatchTimeET(match)}</span>
+        <span className="text-xs text-gray-400">{formatMatchTimeET(match)}</span>
         {fav && (
           <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-gray-400">
             <span className="w-1.5 h-1.5 rounded-full bg-gold" />
@@ -63,7 +63,7 @@ export default function MatchCard({ match, homeTeam, awayTeam, onClick }: Props)
             <div className="bg-zinc-600" style={{ width: `${pred.draw}%` }} />
             <div className="bg-rose-400 rounded-r-full" style={{ width: `${pred.awayWin}%` }} />
           </div>
-          <div className="flex items-center justify-between mt-1.5 text-[11px] text-gray-500">
+          <div className="flex items-center justify-between mt-1.5 text-[11px] text-gray-400">
             <span className="text-sky-300/90">{pred.homeWin}%</span>
             <span>Draw {pred.draw}%</span>
             <span className="text-rose-300/90">{pred.awayWin}%</span>

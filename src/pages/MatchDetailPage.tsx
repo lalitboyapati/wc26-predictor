@@ -44,7 +44,13 @@ export default function MatchDetailPage() {
   const [liveOdds, setLiveOdds] = useState<PolymarketOdds | null>(null);
   const [loadingOdds, setLoadingOdds] = useState(false);
 
-  // Fetch Polymarket odds
+  useEffect(() => {
+    if (match) {
+      document.title = `${match.homeTeam} vs ${match.awayTeam} — WC26`;
+      return () => { document.title = 'WC26 Predictor'; };
+    }
+  }, [match]);
+
   useEffect(() => {
     if (!match) return;
     setLoadingOdds(true);
@@ -73,7 +79,7 @@ export default function MatchDetailPage() {
 
       {/* breadcrumb */}
       <div className="border-b border-white/[0.06] bg-ink-900/40">
-        <div className="max-w-5xl mx-auto px-4 sm:px-5 py-2.5 flex items-center gap-2.5 text-[12px] text-gray-500">
+        <div className="max-w-5xl mx-auto px-4 sm:px-5 py-2.5 flex items-center gap-2.5 text-[12px] text-gray-400">
           <button onClick={() => navigate(-1)} className="text-gray-400 hover:text-gold transition-colors font-medium">← Back</button>
           <span className="text-gray-700">·</span>
           <span>{formatMatchDate(match.date)}</span>
@@ -91,7 +97,7 @@ export default function MatchDetailPage() {
               <Flag code={homeTeam?.flagCode ?? ''} name={match.homeTeam} size={80} className="w-12 h-8 rounded-md" />
               <div className="min-w-0">
                 <p className="font-bold text-lg text-white truncate">{match.homeTeam}</p>
-                <p className="text-xs text-gray-500">#{homeTeam?.rank ?? '–'} · {homeTeam?.points?.toFixed(0) ?? '–'} pts</p>
+                <p className="text-xs text-gray-400">#{homeTeam?.rank ?? '–'} · {homeTeam?.points?.toFixed(0) ?? '–'} pts</p>
               </div>
             </div>
 
@@ -104,13 +110,13 @@ export default function MatchDetailPage() {
                 <span className="text-2xl font-bold text-gray-600">VS</span>
               )}
               <p className="text-[11px] font-semibold text-gold/80 mt-1">Predicted score</p>
-              <p className="text-[11px] text-gray-600 mt-0.5">{formatMatchTimeET(match)}</p>
+              <p className="text-[11px] text-gray-400 mt-0.5">{formatMatchTimeET(match)}</p>
             </div>
 
             <div className="flex-1 flex items-center gap-3 justify-end min-w-0">
               <div className="text-right min-w-0">
                 <p className="font-bold text-lg text-white truncate">{match.awayTeam}</p>
-                <p className="text-xs text-gray-500">#{awayTeam?.rank ?? '–'} · {awayTeam?.points?.toFixed(0) ?? '–'} pts</p>
+                <p className="text-xs text-gray-400">#{awayTeam?.rank ?? '–'} · {awayTeam?.points?.toFixed(0) ?? '–'} pts</p>
               </div>
               <Flag code={awayTeam?.flagCode ?? ''} name={match.awayTeam} size={80} className="w-12 h-8 rounded-md" />
             </div>
@@ -127,7 +133,7 @@ export default function MatchDetailPage() {
                 awayTeam={match.awayTeam}
                 liveOdds={liveOdds ?? undefined}
               />
-              {loadingOdds && <p className="text-[11px] text-gray-600 mt-2">Checking Polymarket…</p>}
+              {loadingOdds && <div className="mt-2 h-1 w-20 rounded-full bg-white/10 animate-pulse" />}
             </div>
           )}
           {bettingSuggestions.length > 0 && (
@@ -138,7 +144,7 @@ export default function MatchDetailPage() {
         {/* Pitch */}
         <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] p-4 sm:p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-bold text-white">Starting XI <span className="font-normal text-gray-500">— tap a player</span></h3>
+            <h3 className="text-sm font-bold text-white">Starting XI <span className="font-normal text-gray-400">— tap a player</span></h3>
             <span className="text-xs text-gray-600">4-3-3</span>
           </div>
           {allMatchPlayers.length > 0 ? (
@@ -168,7 +174,7 @@ export default function MatchDetailPage() {
               ].map(row => (
                 <div key={row.label} className="flex items-center gap-3 text-[13px] tabular-nums">
                   <span className="text-sky-300 font-semibold w-16 text-right">{row.home}</span>
-                  <span className="flex-1 text-center text-gray-500 text-[12px]">{row.label}</span>
+                  <span className="flex-1 text-center text-gray-400 text-[12px]">{row.label}</span>
                   <span className="text-rose-300 font-semibold w-16">{row.away}</span>
                 </div>
               ))}

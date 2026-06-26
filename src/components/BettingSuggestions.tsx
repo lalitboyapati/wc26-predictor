@@ -11,7 +11,7 @@ const TYPE_LABEL: Record<string, string> = {
 };
 
 function ConfidenceRing({ value }: { value: number }) {
-  const color = value >= 65 ? '#fbbf24' : value >= 50 ? '#38bdf8' : '#a1a1aa';
+  const color = value >= 65 ? 'var(--color-gold)' : value >= 50 ? 'var(--color-sky)' : 'var(--color-muted)';
   const r = 15;
   const c = 2 * Math.PI * r;
   const dash = (value / 100) * c;
@@ -35,7 +35,7 @@ function ValueChip({ edge }: { edge: number }) {
   const cls = positive
     ? 'text-emerald-300 bg-emerald-500/12'
     : negative
-    ? 'text-gray-500 bg-white/[0.04]'
+    ? 'text-gray-400 bg-white/[0.04]'
     : 'text-gray-400 bg-white/[0.04]';
   const arrow = positive ? '▲' : negative ? '▼' : '•';
   const sign = edge > 0 ? '+' : '';
@@ -51,7 +51,7 @@ export default function BettingSuggestions({ suggestions }: { suggestions: Betti
     <div className="rounded-2xl border border-white/[0.06] bg-white/[0.014] overflow-hidden">
       <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06]">
         <h3 className="text-sm font-bold text-white">Top Betting Picks</h3>
-        <span className="text-[11px] text-gray-500">model % · odds · value</span>
+        <span className="text-[11px] text-gray-400">model % · odds · value</span>
       </div>
 
       <div className="divide-y divide-white/[0.05]">
@@ -65,7 +65,7 @@ export default function BettingSuggestions({ suggestions }: { suggestions: Betti
                 </span>
                 <span className="text-sm font-semibold text-white truncate">{s.label}</span>
               </div>
-              <p className="text-[12px] text-gray-500 leading-snug">{s.rationale}</p>
+              <p className="text-[12px] text-gray-400 leading-snug">{s.rationale}</p>
             </div>
             <div className="flex-shrink-0 text-right">
               <div className="text-base font-extrabold text-gold tabular-nums leading-none">{s.oddsEstimate}</div>

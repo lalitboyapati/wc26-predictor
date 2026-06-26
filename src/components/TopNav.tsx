@@ -23,7 +23,7 @@ export default function TopNav() {
             <div className="text-[15px] font-extrabold tracking-tight text-white">
               World Cup <span className="text-gold">’26</span>
             </div>
-            <div className="text-[11px] text-gray-500 -mt-0.5">Match Predictor</div>
+            <div className="text-[11px] text-gray-400 -mt-0.5">Match Predictor</div>
           </div>
         </Link>
 
@@ -35,6 +35,7 @@ export default function TopNav() {
               <Link
                 key={t.to}
                 to={t.to}
+                aria-current={on ? 'page' : undefined}
                 className={`px-3 sm:px-3.5 py-1.5 rounded-full text-[13px] font-semibold transition-colors whitespace-nowrap
                   ${on ? 'bg-gold text-ink-900' : 'text-gray-400 hover:text-white'}`}
               >

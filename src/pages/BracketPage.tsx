@@ -1,10 +1,12 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { buildBracket } from '../lib/bracket';
 import { deriveGroups, getQualifiers } from '../lib/groups';
 import Bracket from '../components/Bracket';
 import TopNav from '../components/TopNav';
 
 export default function BracketPage() {
+  useEffect(() => { document.title = 'Knockout Bracket — WC26'; }, []);
+
   const rounds = useMemo(() => {
     const groups = deriveGroups();
     return buildBracket(getQualifiers(groups));
@@ -16,7 +18,7 @@ export default function BracketPage() {
       <main className="max-w-6xl mx-auto px-4 sm:px-5 py-7">
         <div className="mb-6">
           <h1 className="text-2xl font-extrabold tracking-tight text-white">Knockout Bracket</h1>
-          <p className="text-sm text-gray-500 mt-1 max-w-2xl">
+          <p className="text-sm text-gray-400 mt-1 max-w-2xl">
             The full tournament projected out — 32 qualifiers seeded from the group tables, every tie
             resolved by the model through to a predicted champion.
           </p>

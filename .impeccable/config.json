@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "reason": "Product register explicitly permits Inter for tool UIs",
+        "createdAt": "2026-06-26T21:02:40.105Z"
+      }
+    ]
+  }
+}

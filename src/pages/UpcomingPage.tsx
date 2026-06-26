@@ -1,9 +1,11 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { allMatches, todayISO } from '../lib/dataHelpers';
 import MatchDayList from '../components/MatchDayList';
 import TopNav from '../components/TopNav';
 
 export default function UpcomingPage() {
+  useEffect(() => { document.title = 'Upcoming Matches — WC26'; }, []);
+
   const upcoming = useMemo(() => {
     const today = todayISO();
     const future = allMatches.filter(m => m.date >= today);
@@ -18,7 +20,7 @@ export default function UpcomingPage() {
       <main className="max-w-6xl mx-auto px-4 sm:px-5 py-7">
         <div className="mb-7">
           <h1 className="text-2xl font-extrabold tracking-tight text-white">Upcoming Matches</h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-400 mt-1">
             Today and beyond — tap a fixture for the full prediction, lineups and betting picks.
           </p>
         </div>

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { deriveGroups } from '../lib/groups';
 import GroupStandings from '../components/GroupStandings';
@@ -6,6 +6,8 @@ import TopNav from '../components/TopNav';
 
 export default function GroupsPage() {
   const navigate = useNavigate();
+  useEffect(() => { document.title = 'Group Standings — WC26'; }, []);
+
   const groups = useMemo(() => deriveGroups(), []);
 
   return (
@@ -15,7 +17,7 @@ export default function GroupsPage() {
         <div className="mb-6 flex items-start justify-between gap-4 flex-wrap">
           <div>
             <h1 className="text-2xl font-extrabold tracking-tight text-white">Group Standings</h1>
-            <p className="text-sm text-gray-500 mt-1 max-w-2xl">
+            <p className="text-sm text-gray-400 mt-1 max-w-2xl">
               Projected final tables. Top 2 plus the 8 best third-placed teams{' '}
               <button onClick={() => navigate('/bracket')} className="text-gold hover:underline font-medium">
                 advance to the bracket

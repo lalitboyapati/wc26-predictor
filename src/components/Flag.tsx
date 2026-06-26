@@ -27,6 +27,7 @@ export default function Flag({ code, name = '', size = 40, className = '' }: Pro
       src={getFlagUrl(code, size)}
       alt={name}
       title={name}
+      loading="lazy"
       className={`object-cover rounded-sm ${className}`}
       onError={e => {
         const el = e.target as HTMLImageElement;
